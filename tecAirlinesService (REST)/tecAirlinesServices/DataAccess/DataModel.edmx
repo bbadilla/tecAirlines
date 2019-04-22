@@ -1,0 +1,677 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="tecAirlinesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Aeronave">
+          <Key>
+            <PropertyRef Name="Identificador" />
+          </Key>
+          <Property Name="Identificador" Type="int" Nullable="false" />
+          <Property Name="Modelo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Capacidad" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'tecAirlines.dbo.Escala' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Escala">
+          <Key>
+            <PropertyRef Name="C_Vuelo" />
+            <PropertyRef Name="Salida" />
+            <PropertyRef Name="Llegada" />
+            <PropertyRef Name="Millas" />
+          </Key>
+          <Property Name="C_Vuelo" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="Salida" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Llegada" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Millas" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Programa">
+          <Key>
+            <PropertyRef Name="Carne" />
+          </Key>
+          <Property Name="Carne" Type="int" Nullable="false" />
+          <Property Name="ID_Universidad" Type="int" Nullable="false" />
+          <Property Name="Millas" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'tecAirlines.dbo.Promocion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Promocion">
+          <Key>
+            <PropertyRef Name="Carne" />
+            <PropertyRef Name="C_Vuelo" />
+            <PropertyRef Name="F_Inicio" />
+            <PropertyRef Name="F_Fin" />
+            <PropertyRef Name="Porcentaje" />
+            <PropertyRef Name="Imagen" />
+          </Key>
+          <Property Name="Carne" Type="int" Nullable="false" />
+          <Property Name="C_Vuelo" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="F_Inicio" Type="time" Precision="7" Nullable="false" />
+          <Property Name="F_Fin" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Porcentaje" Type="int" Nullable="false" />
+          <Property Name="Imagen" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reserva">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="int" Nullable="false" />
+          <Property Name="Chequeo" Type="bit" Nullable="false" />
+          <Property Name="Equipaje" Type="int" Nullable="false" />
+          <Property Name="C_Vuelo" Type="char" MaxLength="7" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'tecAirlines.dbo.Reservaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Reservaciones">
+          <Key>
+            <PropertyRef Name="C_Reserva" />
+            <PropertyRef Name="C_Usuario" />
+          </Key>
+          <Property Name="C_Reserva" Type="int" Nullable="false" />
+          <Property Name="C_Usuario" Type="varchar" MaxLength="35" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'tecAirlines.dbo.Tiquete' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Tiquete">
+          <Key>
+            <PropertyRef Name="C_Reserva" />
+            <PropertyRef Name="N_Asiento" />
+          </Key>
+          <Property Name="C_Reserva" Type="int" Nullable="false" />
+          <Property Name="N_Asiento" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Universidad">
+          <Key>
+            <PropertyRef Name="Identificador" />
+          </Key>
+          <Property Name="Identificador" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Correo" />
+          </Key>
+          <Property Name="Nombre" Type="varchar" MaxLength="20" />
+          <Property Name="Apellido1" Type="varchar" MaxLength="20" />
+          <Property Name="Apellido2" Type="varchar" MaxLength="20" />
+          <Property Name="Telefono" Type="int" Nullable="false" />
+          <Property Name="Carne" Type="int" />
+          <Property Name="Correo" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="Contraseña" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vuelo">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="Estado" Type="bit" />
+          <Property Name="Categoria" Type="int" Nullable="false" />
+          <Property Name="Costo" Type="int" Nullable="false" />
+          <Property Name="F_Salida" Type="time" Precision="7" Nullable="false" />
+          <Property Name="F_Llegada" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Distancia" Type="int" Nullable="false" />
+          <Property Name="ID_Aeronave" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Escala__C_Vuelo__4BAC3F29">
+          <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="1" />
+          <End Role="Escala" Type="Self.Escala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vuelo">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Escala">
+              <PropertyRef Name="C_Vuelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Programa__Carne__440B1D61' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Programa__Carne__440B1D61" />-->
+        <Association Name="FK__Programa__ID_Uni__44FF419A">
+          <End Role="Universidad" Type="Self.Universidad" Multiplicity="1" />
+          <End Role="Programa" Type="Self.Programa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Universidad">
+              <PropertyRef Name="Identificador" />
+            </Principal>
+            <Dependent Role="Programa">
+              <PropertyRef Name="ID_Universidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Promocion__C_Vue__4AB81AF0">
+          <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="1" />
+          <End Role="Promocion" Type="Self.Promocion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vuelo">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Promocion">
+              <PropertyRef Name="C_Vuelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Promocion__Carne__49C3F6B7">
+          <End Role="Programa" Type="Self.Programa" Multiplicity="1" />
+          <End Role="Promocion" Type="Self.Promocion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Programa">
+              <PropertyRef Name="Carne" />
+            </Principal>
+            <Dependent Role="Promocion">
+              <PropertyRef Name="Carne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reserva__C_Vuelo__4D94879B">
+          <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="1" />
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vuelo">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="C_Vuelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservaci__C_Res__4F7CD00D">
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="1" />
+          <End Role="Reservaciones" Type="Self.Reservaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reserva">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Reservaciones">
+              <PropertyRef Name="C_Reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservaci__C_Usu__5070F446">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Reservaciones" Type="Self.Reservaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Correo" />
+            </Principal>
+            <Dependent Role="Reservaciones">
+              <PropertyRef Name="C_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tiquete__C_Reser__4E88ABD4">
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="1" />
+          <End Role="Tiquete" Type="Self.Tiquete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reserva">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Tiquete">
+              <PropertyRef Name="C_Reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vuelo__ID_Aerona__48CFD27E">
+          <End Role="Aeronave" Type="Self.Aeronave" Multiplicity="1" />
+          <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeronave">
+              <PropertyRef Name="Identificador" />
+            </Principal>
+            <Dependent Role="Vuelo">
+              <PropertyRef Name="ID_Aeronave" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tecAirlinesModelStoreContainer">
+          <EntitySet Name="Aeronave" EntityType="Self.Aeronave" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Programa" EntityType="Self.Programa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reserva" EntityType="Self.Reserva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Universidad" EntityType="Self.Universidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vuelo" EntityType="Self.Vuelo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Escala" EntityType="Self.Escala" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Escala].[C_Vuelo] AS [C_Vuelo], 
+    [Escala].[Salida] AS [Salida], 
+    [Escala].[Llegada] AS [Llegada], 
+    [Escala].[Millas] AS [Millas]
+    FROM [dbo].[Escala] AS [Escala]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Promocion" EntityType="Self.Promocion" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Promocion].[Carne] AS [Carne], 
+    [Promocion].[C_Vuelo] AS [C_Vuelo], 
+    [Promocion].[F_Inicio] AS [F_Inicio], 
+    [Promocion].[F_Fin] AS [F_Fin], 
+    [Promocion].[Porcentaje] AS [Porcentaje], 
+    [Promocion].[Imagen] AS [Imagen]
+    FROM [dbo].[Promocion] AS [Promocion]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Reservaciones" EntityType="Self.Reservaciones" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Reservaciones].[C_Reserva] AS [C_Reserva], 
+    [Reservaciones].[C_Usuario] AS [C_Usuario]
+    FROM [dbo].[Reservaciones] AS [Reservaciones]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Tiquete" EntityType="Self.Tiquete" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Tiquete].[C_Reserva] AS [C_Reserva], 
+    [Tiquete].[N_Asiento] AS [N_Asiento]
+    FROM [dbo].[Tiquete] AS [Tiquete]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Escala__C_Vuelo__4BAC3F29" Association="Self.FK__Escala__C_Vuelo__4BAC3F29">
+            <End Role="Vuelo" EntitySet="Vuelo" />
+            <End Role="Escala" EntitySet="Escala" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Programa__ID_Uni__44FF419A" Association="Self.FK__Programa__ID_Uni__44FF419A">
+            <End Role="Universidad" EntitySet="Universidad" />
+            <End Role="Programa" EntitySet="Programa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Promocion__C_Vue__4AB81AF0" Association="Self.FK__Promocion__C_Vue__4AB81AF0">
+            <End Role="Vuelo" EntitySet="Vuelo" />
+            <End Role="Promocion" EntitySet="Promocion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Promocion__Carne__49C3F6B7" Association="Self.FK__Promocion__Carne__49C3F6B7">
+            <End Role="Programa" EntitySet="Programa" />
+            <End Role="Promocion" EntitySet="Promocion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reserva__C_Vuelo__4D94879B" Association="Self.FK__Reserva__C_Vuelo__4D94879B">
+            <End Role="Vuelo" EntitySet="Vuelo" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservaci__C_Res__4F7CD00D" Association="Self.FK__Reservaci__C_Res__4F7CD00D">
+            <End Role="Reserva" EntitySet="Reserva" />
+            <End Role="Reservaciones" EntitySet="Reservaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservaci__C_Usu__5070F446" Association="Self.FK__Reservaci__C_Usu__5070F446">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Reservaciones" EntitySet="Reservaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tiquete__C_Reser__4E88ABD4" Association="Self.FK__Tiquete__C_Reser__4E88ABD4">
+            <End Role="Reserva" EntitySet="Reserva" />
+            <End Role="Tiquete" EntitySet="Tiquete" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vuelo__ID_Aerona__48CFD27E" Association="Self.FK__Vuelo__ID_Aerona__48CFD27E">
+            <End Role="Aeronave" EntitySet="Aeronave" />
+            <End Role="Vuelo" EntitySet="Vuelo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="tecAirlinesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Aeronave">
+          <Key>
+            <PropertyRef Name="Identificador" />
+          </Key>
+          <Property Name="Identificador" Type="Int32" Nullable="false" />
+          <Property Name="Modelo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Capacidad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Vueloes" Relationship="Self.FK__Vuelo__ID_Aerona__48CFD27E" FromRole="Aeronave" ToRole="Vuelo" />
+        </EntityType>
+        <EntityType Name="Programa">
+          <Key>
+            <PropertyRef Name="Carne" />
+          </Key>
+          <Property Name="Carne" Type="Int32" Nullable="false" />
+          <Property Name="ID_Universidad" Type="Int32" Nullable="false" />
+          <Property Name="Millas" Type="Int32" />
+          <NavigationProperty Name="Universidad" Relationship="Self.FK__Programa__ID_Uni__44FF419A" FromRole="Programa" ToRole="Universidad" />
+          <NavigationProperty Name="Promocions" Relationship="Self.FK__Promocion__Carne__49C3F6B7" FromRole="Programa" ToRole="Promocion" />
+        </EntityType>
+        <EntityType Name="Reserva">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="Int32" Nullable="false" />
+          <Property Name="Chequeo" Type="Boolean" Nullable="false" />
+          <Property Name="Equipaje" Type="Int32" Nullable="false" />
+          <Property Name="C_Vuelo" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Vuelo" Relationship="Self.FK__Reserva__C_Vuelo__4D94879B" FromRole="Reserva" ToRole="Vuelo" />
+          <NavigationProperty Name="Tiquetes" Relationship="Self.FK__Tiquete__C_Reser__4E88ABD4" FromRole="Reserva" ToRole="Tiquete" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.Reservaciones" FromRole="Reserva" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Universidad">
+          <Key>
+            <PropertyRef Name="Identificador" />
+          </Key>
+          <Property Name="Identificador" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Programas" Relationship="Self.FK__Programa__ID_Uni__44FF419A" FromRole="Universidad" ToRole="Programa" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Correo" />
+          </Key>
+          <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="Int32" Nullable="false" />
+          <Property Name="Carne" Type="Int32" />
+          <Property Name="Correo" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Reservas" Relationship="Self.Reservaciones" FromRole="Usuario" ToRole="Reserva" />
+        </EntityType>
+        <EntityType Name="Vuelo">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" />
+          <Property Name="Categoria" Type="Int32" Nullable="false" />
+          <Property Name="Costo" Type="Int32" Nullable="false" />
+          <Property Name="F_Salida" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="F_Llegada" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Distancia" Type="Int32" Nullable="false" />
+          <Property Name="ID_Aeronave" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Aeronave" Relationship="Self.FK__Vuelo__ID_Aerona__48CFD27E" FromRole="Vuelo" ToRole="Aeronave" />
+          <NavigationProperty Name="Reservas" Relationship="Self.FK__Reserva__C_Vuelo__4D94879B" FromRole="Vuelo" ToRole="Reserva" />
+          <NavigationProperty Name="Escalas" Relationship="Self.FK__Escala__C_Vuelo__4BAC3F29" FromRole="Vuelo" ToRole="Escala" />
+          <NavigationProperty Name="Promocions" Relationship="Self.FK__Promocion__C_Vue__4AB81AF0" FromRole="Vuelo" ToRole="Promocion" />
+        </EntityType>
+        <EntityType Name="Escala">
+          <Key>
+            <PropertyRef Name="C_Vuelo" />
+            <PropertyRef Name="Salida" />
+            <PropertyRef Name="Llegada" />
+            <PropertyRef Name="Millas" />
+          </Key>
+          <Property Name="C_Vuelo" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Salida" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Llegada" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Millas" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Vuelo" Relationship="Self.FK__Escala__C_Vuelo__4BAC3F29" FromRole="Escala" ToRole="Vuelo" />
+        </EntityType>
+        <EntityType Name="Promocion">
+          <Key>
+            <PropertyRef Name="Carne" />
+            <PropertyRef Name="C_Vuelo" />
+            <PropertyRef Name="F_Inicio" />
+            <PropertyRef Name="F_Fin" />
+            <PropertyRef Name="Porcentaje" />
+            <PropertyRef Name="Imagen" />
+          </Key>
+          <Property Name="Carne" Type="Int32" Nullable="false" />
+          <Property Name="C_Vuelo" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="F_Inicio" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="F_Fin" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Porcentaje" Type="Int32" Nullable="false" />
+          <Property Name="Imagen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Programa" Relationship="Self.FK__Promocion__Carne__49C3F6B7" FromRole="Promocion" ToRole="Programa" />
+          <NavigationProperty Name="Vuelo" Relationship="Self.FK__Promocion__C_Vue__4AB81AF0" FromRole="Promocion" ToRole="Vuelo" />
+        </EntityType>
+        <EntityType Name="Tiquete">
+          <Key>
+            <PropertyRef Name="C_Reserva" />
+            <PropertyRef Name="N_Asiento" />
+          </Key>
+          <Property Name="C_Reserva" Type="Int32" Nullable="false" />
+          <Property Name="N_Asiento" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Reserva" Relationship="Self.FK__Tiquete__C_Reser__4E88ABD4" FromRole="Tiquete" ToRole="Reserva" />
+        </EntityType>
+        <Association Name="FK__Vuelo__ID_Aerona__48CFD27E">
+          <End Role="Aeronave" Type="Self.Aeronave" Multiplicity="1" />
+          <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeronave">
+              <PropertyRef Name="Identificador" />
+            </Principal>
+            <Dependent Role="Vuelo">
+              <PropertyRef Name="ID_Aeronave" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Programa__ID_Uni__44FF419A">
+          <End Role="Universidad" Type="Self.Universidad" Multiplicity="1" />
+          <End Role="Programa" Type="Self.Programa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Universidad">
+              <PropertyRef Name="Identificador" />
+            </Principal>
+            <Dependent Role="Programa">
+              <PropertyRef Name="ID_Universidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Promocion__Carne__49C3F6B7">
+          <End Role="Programa" Type="Self.Programa" Multiplicity="1" />
+          <End Role="Promocion" Type="Self.Promocion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Programa">
+              <PropertyRef Name="Carne" />
+            </Principal>
+            <Dependent Role="Promocion">
+              <PropertyRef Name="Carne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reserva__C_Vuelo__4D94879B">
+          <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="1" />
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vuelo">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="C_Vuelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tiquete__C_Reser__4E88ABD4">
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="1" />
+          <End Role="Tiquete" Type="Self.Tiquete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reserva">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Tiquete">
+              <PropertyRef Name="C_Reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Escala__C_Vuelo__4BAC3F29">
+          <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="1" />
+          <End Role="Escala" Type="Self.Escala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vuelo">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Escala">
+              <PropertyRef Name="C_Vuelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Promocion__C_Vue__4AB81AF0">
+          <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="1" />
+          <End Role="Promocion" Type="Self.Promocion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vuelo">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Promocion">
+              <PropertyRef Name="C_Vuelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reservaciones">
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="tecAirlinesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Aeronaves" EntityType="Self.Aeronave" />
+          <EntitySet Name="Programas" EntityType="Self.Programa" />
+          <EntitySet Name="Reservas" EntityType="Self.Reserva" />
+          <EntitySet Name="Universidads" EntityType="Self.Universidad" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+          <EntitySet Name="Vueloes" EntityType="Self.Vuelo" />
+          <EntitySet Name="Escalas" EntityType="Self.Escala" />
+          <EntitySet Name="Promocions" EntityType="Self.Promocion" />
+          <EntitySet Name="Tiquetes" EntityType="Self.Tiquete" />
+          <AssociationSet Name="FK__Vuelo__ID_Aerona__48CFD27E" Association="Self.FK__Vuelo__ID_Aerona__48CFD27E">
+            <End Role="Aeronave" EntitySet="Aeronaves" />
+            <End Role="Vuelo" EntitySet="Vueloes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Programa__ID_Uni__44FF419A" Association="Self.FK__Programa__ID_Uni__44FF419A">
+            <End Role="Universidad" EntitySet="Universidads" />
+            <End Role="Programa" EntitySet="Programas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Promocion__Carne__49C3F6B7" Association="Self.FK__Promocion__Carne__49C3F6B7">
+            <End Role="Programa" EntitySet="Programas" />
+            <End Role="Promocion" EntitySet="Promocions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reserva__C_Vuelo__4D94879B" Association="Self.FK__Reserva__C_Vuelo__4D94879B">
+            <End Role="Vuelo" EntitySet="Vueloes" />
+            <End Role="Reserva" EntitySet="Reservas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tiquete__C_Reser__4E88ABD4" Association="Self.FK__Tiquete__C_Reser__4E88ABD4">
+            <End Role="Reserva" EntitySet="Reservas" />
+            <End Role="Tiquete" EntitySet="Tiquetes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Escala__C_Vuelo__4BAC3F29" Association="Self.FK__Escala__C_Vuelo__4BAC3F29">
+            <End Role="Vuelo" EntitySet="Vueloes" />
+            <End Role="Escala" EntitySet="Escalas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Promocion__C_Vue__4AB81AF0" Association="Self.FK__Promocion__C_Vue__4AB81AF0">
+            <End Role="Vuelo" EntitySet="Vueloes" />
+            <End Role="Promocion" EntitySet="Promocions" />
+          </AssociationSet>
+          <AssociationSet Name="Reservaciones" Association="Self.Reservaciones">
+            <End Role="Reserva" EntitySet="Reservas" />
+            <End Role="Usuario" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="tecAirlinesModelStoreContainer" CdmEntityContainer="tecAirlinesEntities">
+          <EntitySetMapping Name="Aeronaves">
+            <EntityTypeMapping TypeName="tecAirlinesModel.Aeronave">
+              <MappingFragment StoreEntitySet="Aeronave">
+                <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Programas">
+            <EntityTypeMapping TypeName="tecAirlinesModel.Programa">
+              <MappingFragment StoreEntitySet="Programa">
+                <ScalarProperty Name="Carne" ColumnName="Carne" />
+                <ScalarProperty Name="ID_Universidad" ColumnName="ID_Universidad" />
+                <ScalarProperty Name="Millas" ColumnName="Millas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservas">
+            <EntityTypeMapping TypeName="tecAirlinesModel.Reserva">
+              <MappingFragment StoreEntitySet="Reserva">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Chequeo" ColumnName="Chequeo" />
+                <ScalarProperty Name="Equipaje" ColumnName="Equipaje" />
+                <ScalarProperty Name="C_Vuelo" ColumnName="C_Vuelo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Universidads">
+            <EntityTypeMapping TypeName="tecAirlinesModel.Universidad">
+              <MappingFragment StoreEntitySet="Universidad">
+                <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="tecAirlinesModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido1" ColumnName="Apellido1" />
+                <ScalarProperty Name="Apellido2" ColumnName="Apellido2" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Carne" ColumnName="Carne" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vueloes">
+            <EntityTypeMapping TypeName="tecAirlinesModel.Vuelo">
+              <MappingFragment StoreEntitySet="Vuelo">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="F_Salida" ColumnName="F_Salida" />
+                <ScalarProperty Name="F_Llegada" ColumnName="F_Llegada" />
+                <ScalarProperty Name="Distancia" ColumnName="Distancia" />
+                <ScalarProperty Name="ID_Aeronave" ColumnName="ID_Aeronave" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Escalas">
+            <EntityTypeMapping TypeName="tecAirlinesModel.Escala">
+              <MappingFragment StoreEntitySet="Escala">
+                <ScalarProperty Name="C_Vuelo" ColumnName="C_Vuelo" />
+                <ScalarProperty Name="Salida" ColumnName="Salida" />
+                <ScalarProperty Name="Llegada" ColumnName="Llegada" />
+                <ScalarProperty Name="Millas" ColumnName="Millas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Promocions">
+            <EntityTypeMapping TypeName="tecAirlinesModel.Promocion">
+              <MappingFragment StoreEntitySet="Promocion">
+                <ScalarProperty Name="Carne" ColumnName="Carne" />
+                <ScalarProperty Name="C_Vuelo" ColumnName="C_Vuelo" />
+                <ScalarProperty Name="F_Inicio" ColumnName="F_Inicio" />
+                <ScalarProperty Name="F_Fin" ColumnName="F_Fin" />
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tiquetes">
+            <EntityTypeMapping TypeName="tecAirlinesModel.Tiquete">
+              <MappingFragment StoreEntitySet="Tiquete">
+                <ScalarProperty Name="C_Reserva" ColumnName="C_Reserva" />
+                <ScalarProperty Name="N_Asiento" ColumnName="N_Asiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Reservaciones" TypeName="tecAirlinesModel.Reservaciones" StoreEntitySet="Reservaciones">
+            <EndProperty Name="Reserva">
+              <ScalarProperty Name="Codigo" ColumnName="C_Reserva" />
+            </EndProperty>
+            <EndProperty Name="Usuario">
+              <ScalarProperty Name="Correo" ColumnName="C_Usuario" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

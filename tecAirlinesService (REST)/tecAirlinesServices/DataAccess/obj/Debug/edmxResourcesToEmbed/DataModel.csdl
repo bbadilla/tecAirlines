@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="tecAirlinesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Aeronave">
+    <Key>
+      <PropertyRef Name="Identificador" />
+    </Key>
+    <Property Name="Identificador" Type="Int32" Nullable="false" />
+    <Property Name="Modelo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Capacidad" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Vueloes" Relationship="Self.FK__Vuelo__ID_Aerona__48CFD27E" FromRole="Aeronave" ToRole="Vuelo" />
+  </EntityType>
+  <EntityType Name="Programa">
+    <Key>
+      <PropertyRef Name="Carne" />
+    </Key>
+    <Property Name="Carne" Type="Int32" Nullable="false" />
+    <Property Name="ID_Universidad" Type="Int32" Nullable="false" />
+    <Property Name="Millas" Type="Int32" />
+    <NavigationProperty Name="Universidad" Relationship="Self.FK__Programa__ID_Uni__44FF419A" FromRole="Programa" ToRole="Universidad" />
+    <NavigationProperty Name="Promocions" Relationship="Self.FK__Promocion__Carne__49C3F6B7" FromRole="Programa" ToRole="Promocion" />
+  </EntityType>
+  <EntityType Name="Reserva">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="Int32" Nullable="false" />
+    <Property Name="Chequeo" Type="Boolean" Nullable="false" />
+    <Property Name="Equipaje" Type="Int32" Nullable="false" />
+    <Property Name="C_Vuelo" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Vuelo" Relationship="Self.FK__Reserva__C_Vuelo__4D94879B" FromRole="Reserva" ToRole="Vuelo" />
+    <NavigationProperty Name="Tiquetes" Relationship="Self.FK__Tiquete__C_Reser__4E88ABD4" FromRole="Reserva" ToRole="Tiquete" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.Reservaciones" FromRole="Reserva" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Universidad">
+    <Key>
+      <PropertyRef Name="Identificador" />
+    </Key>
+    <Property Name="Identificador" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Programas" Relationship="Self.FK__Programa__ID_Uni__44FF419A" FromRole="Universidad" ToRole="Programa" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Correo" />
+    </Key>
+    <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Apellido1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Apellido2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="Int32" Nullable="false" />
+    <Property Name="Carne" Type="Int32" />
+    <Property Name="Correo" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Contraseña" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Reservas" Relationship="Self.Reservaciones" FromRole="Usuario" ToRole="Reserva" />
+  </EntityType>
+  <EntityType Name="Vuelo">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Estado" Type="Boolean" />
+    <Property Name="Categoria" Type="Int32" Nullable="false" />
+    <Property Name="Costo" Type="Int32" Nullable="false" />
+    <Property Name="F_Salida" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="F_Llegada" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="Distancia" Type="Int32" Nullable="false" />
+    <Property Name="ID_Aeronave" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Aeronave" Relationship="Self.FK__Vuelo__ID_Aerona__48CFD27E" FromRole="Vuelo" ToRole="Aeronave" />
+    <NavigationProperty Name="Reservas" Relationship="Self.FK__Reserva__C_Vuelo__4D94879B" FromRole="Vuelo" ToRole="Reserva" />
+    <NavigationProperty Name="Escalas" Relationship="Self.FK__Escala__C_Vuelo__4BAC3F29" FromRole="Vuelo" ToRole="Escala" />
+    <NavigationProperty Name="Promocions" Relationship="Self.FK__Promocion__C_Vue__4AB81AF0" FromRole="Vuelo" ToRole="Promocion" />
+  </EntityType>
+  <EntityType Name="Escala">
+    <Key>
+      <PropertyRef Name="C_Vuelo" />
+      <PropertyRef Name="Salida" />
+      <PropertyRef Name="Llegada" />
+      <PropertyRef Name="Millas" />
+    </Key>
+    <Property Name="C_Vuelo" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Salida" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Llegada" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Millas" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Vuelo" Relationship="Self.FK__Escala__C_Vuelo__4BAC3F29" FromRole="Escala" ToRole="Vuelo" />
+  </EntityType>
+  <EntityType Name="Promocion">
+    <Key>
+      <PropertyRef Name="Carne" />
+      <PropertyRef Name="C_Vuelo" />
+      <PropertyRef Name="F_Inicio" />
+      <PropertyRef Name="F_Fin" />
+      <PropertyRef Name="Porcentaje" />
+      <PropertyRef Name="Imagen" />
+    </Key>
+    <Property Name="Carne" Type="Int32" Nullable="false" />
+    <Property Name="C_Vuelo" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="F_Inicio" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="F_Fin" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="Porcentaje" Type="Int32" Nullable="false" />
+    <Property Name="Imagen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Programa" Relationship="Self.FK__Promocion__Carne__49C3F6B7" FromRole="Promocion" ToRole="Programa" />
+    <NavigationProperty Name="Vuelo" Relationship="Self.FK__Promocion__C_Vue__4AB81AF0" FromRole="Promocion" ToRole="Vuelo" />
+  </EntityType>
+  <EntityType Name="Tiquete">
+    <Key>
+      <PropertyRef Name="C_Reserva" />
+      <PropertyRef Name="N_Asiento" />
+    </Key>
+    <Property Name="C_Reserva" Type="Int32" Nullable="false" />
+    <Property Name="N_Asiento" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Reserva" Relationship="Self.FK__Tiquete__C_Reser__4E88ABD4" FromRole="Tiquete" ToRole="Reserva" />
+  </EntityType>
+  <Association Name="FK__Vuelo__ID_Aerona__48CFD27E">
+    <End Role="Aeronave" Type="Self.Aeronave" Multiplicity="1" />
+    <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Aeronave">
+        <PropertyRef Name="Identificador" />
+      </Principal>
+      <Dependent Role="Vuelo">
+        <PropertyRef Name="ID_Aeronave" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Programa__ID_Uni__44FF419A">
+    <End Role="Universidad" Type="Self.Universidad" Multiplicity="1" />
+    <End Role="Programa" Type="Self.Programa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Universidad">
+        <PropertyRef Name="Identificador" />
+      </Principal>
+      <Dependent Role="Programa">
+        <PropertyRef Name="ID_Universidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Promocion__Carne__49C3F6B7">
+    <End Role="Programa" Type="Self.Programa" Multiplicity="1" />
+    <End Role="Promocion" Type="Self.Promocion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Programa">
+        <PropertyRef Name="Carne" />
+      </Principal>
+      <Dependent Role="Promocion">
+        <PropertyRef Name="Carne" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reserva__C_Vuelo__4D94879B">
+    <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="1" />
+    <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vuelo">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Reserva">
+        <PropertyRef Name="C_Vuelo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tiquete__C_Reser__4E88ABD4">
+    <End Role="Reserva" Type="Self.Reserva" Multiplicity="1" />
+    <End Role="Tiquete" Type="Self.Tiquete" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reserva">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Tiquete">
+        <PropertyRef Name="C_Reserva" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Escala__C_Vuelo__4BAC3F29">
+    <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="1" />
+    <End Role="Escala" Type="Self.Escala" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vuelo">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Escala">
+        <PropertyRef Name="C_Vuelo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Promocion__C_Vue__4AB81AF0">
+    <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="1" />
+    <End Role="Promocion" Type="Self.Promocion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vuelo">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Promocion">
+        <PropertyRef Name="C_Vuelo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Reservaciones">
+    <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="tecAirlinesEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Aeronaves" EntityType="Self.Aeronave" />
+    <EntitySet Name="Programas" EntityType="Self.Programa" />
+    <EntitySet Name="Reservas" EntityType="Self.Reserva" />
+    <EntitySet Name="Universidads" EntityType="Self.Universidad" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+    <EntitySet Name="Vueloes" EntityType="Self.Vuelo" />
+    <EntitySet Name="Escalas" EntityType="Self.Escala" />
+    <EntitySet Name="Promocions" EntityType="Self.Promocion" />
+    <EntitySet Name="Tiquetes" EntityType="Self.Tiquete" />
+    <AssociationSet Name="FK__Vuelo__ID_Aerona__48CFD27E" Association="Self.FK__Vuelo__ID_Aerona__48CFD27E">
+      <End Role="Aeronave" EntitySet="Aeronaves" />
+      <End Role="Vuelo" EntitySet="Vueloes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Programa__ID_Uni__44FF419A" Association="Self.FK__Programa__ID_Uni__44FF419A">
+      <End Role="Universidad" EntitySet="Universidads" />
+      <End Role="Programa" EntitySet="Programas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Promocion__Carne__49C3F6B7" Association="Self.FK__Promocion__Carne__49C3F6B7">
+      <End Role="Programa" EntitySet="Programas" />
+      <End Role="Promocion" EntitySet="Promocions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reserva__C_Vuelo__4D94879B" Association="Self.FK__Reserva__C_Vuelo__4D94879B">
+      <End Role="Vuelo" EntitySet="Vueloes" />
+      <End Role="Reserva" EntitySet="Reservas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tiquete__C_Reser__4E88ABD4" Association="Self.FK__Tiquete__C_Reser__4E88ABD4">
+      <End Role="Reserva" EntitySet="Reservas" />
+      <End Role="Tiquete" EntitySet="Tiquetes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Escala__C_Vuelo__4BAC3F29" Association="Self.FK__Escala__C_Vuelo__4BAC3F29">
+      <End Role="Vuelo" EntitySet="Vueloes" />
+      <End Role="Escala" EntitySet="Escalas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Promocion__C_Vue__4AB81AF0" Association="Self.FK__Promocion__C_Vue__4AB81AF0">
+      <End Role="Vuelo" EntitySet="Vueloes" />
+      <End Role="Promocion" EntitySet="Promocions" />
+    </AssociationSet>
+    <AssociationSet Name="Reservaciones" Association="Self.Reservaciones">
+      <End Role="Reserva" EntitySet="Reservas" />
+      <End Role="Usuario" EntitySet="Usuarios" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

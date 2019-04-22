@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="tecAirlinesModelStoreContainer" CdmEntityContainer="tecAirlinesEntities">
+    <EntitySetMapping Name="Aeronaves">
+      <EntityTypeMapping TypeName="tecAirlinesModel.Aeronave">
+        <MappingFragment StoreEntitySet="Aeronave">
+          <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+          <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+          <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Programas">
+      <EntityTypeMapping TypeName="tecAirlinesModel.Programa">
+        <MappingFragment StoreEntitySet="Programa">
+          <ScalarProperty Name="Carne" ColumnName="Carne" />
+          <ScalarProperty Name="ID_Universidad" ColumnName="ID_Universidad" />
+          <ScalarProperty Name="Millas" ColumnName="Millas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reservas">
+      <EntityTypeMapping TypeName="tecAirlinesModel.Reserva">
+        <MappingFragment StoreEntitySet="Reserva">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Chequeo" ColumnName="Chequeo" />
+          <ScalarProperty Name="Equipaje" ColumnName="Equipaje" />
+          <ScalarProperty Name="C_Vuelo" ColumnName="C_Vuelo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Universidads">
+      <EntityTypeMapping TypeName="tecAirlinesModel.Universidad">
+        <MappingFragment StoreEntitySet="Universidad">
+          <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="tecAirlinesModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido1" ColumnName="Apellido1" />
+          <ScalarProperty Name="Apellido2" ColumnName="Apellido2" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Carne" ColumnName="Carne" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vueloes">
+      <EntityTypeMapping TypeName="tecAirlinesModel.Vuelo">
+        <MappingFragment StoreEntitySet="Vuelo">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+          <ScalarProperty Name="Costo" ColumnName="Costo" />
+          <ScalarProperty Name="F_Salida" ColumnName="F_Salida" />
+          <ScalarProperty Name="F_Llegada" ColumnName="F_Llegada" />
+          <ScalarProperty Name="Distancia" ColumnName="Distancia" />
+          <ScalarProperty Name="ID_Aeronave" ColumnName="ID_Aeronave" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Escalas">
+      <EntityTypeMapping TypeName="tecAirlinesModel.Escala">
+        <MappingFragment StoreEntitySet="Escala">
+          <ScalarProperty Name="C_Vuelo" ColumnName="C_Vuelo" />
+          <ScalarProperty Name="Salida" ColumnName="Salida" />
+          <ScalarProperty Name="Llegada" ColumnName="Llegada" />
+          <ScalarProperty Name="Millas" ColumnName="Millas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Promocions">
+      <EntityTypeMapping TypeName="tecAirlinesModel.Promocion">
+        <MappingFragment StoreEntitySet="Promocion">
+          <ScalarProperty Name="Carne" ColumnName="Carne" />
+          <ScalarProperty Name="C_Vuelo" ColumnName="C_Vuelo" />
+          <ScalarProperty Name="F_Inicio" ColumnName="F_Inicio" />
+          <ScalarProperty Name="F_Fin" ColumnName="F_Fin" />
+          <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tiquetes">
+      <EntityTypeMapping TypeName="tecAirlinesModel.Tiquete">
+        <MappingFragment StoreEntitySet="Tiquete">
+          <ScalarProperty Name="C_Reserva" ColumnName="C_Reserva" />
+          <ScalarProperty Name="N_Asiento" ColumnName="N_Asiento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Reservaciones" TypeName="tecAirlinesModel.Reservaciones" StoreEntitySet="Reservaciones">
+      <EndProperty Name="Reserva">
+        <ScalarProperty Name="Codigo" ColumnName="C_Reserva" />
+      </EndProperty>
+      <EndProperty Name="Usuario">
+        <ScalarProperty Name="Correo" ColumnName="C_Usuario" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
