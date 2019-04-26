@@ -2,14 +2,14 @@ ALTER TABLE Usuario
 	ADD PRIMARY KEY	(Correo),
 		UNIQUE		(Carne);
 
+ALTER TABLE Universidad
+	ADD PRIMARY KEY	(Identificador);
+
 ALTER TABLE Programa
 	ADD FOREIGN KEY (Carne)				REFERENCES	Usuario(Carne),
 		PRIMARY KEY	(Carne),
 		FOREIGN KEY (ID_Universidad)	REFERENCES	Universidad(Identificador),
 		DEFAULT		0					FOR			Millas;
-
-ALTER TABLE Universidad
-	ADD PRIMARY KEY	(Identificador);
 
 ALTER TABLE Aeronave
 	ADD PRIMARY KEY (Identificador);
@@ -23,8 +23,13 @@ ALTER TABLE Promocion
 	ADD FOREIGN KEY (Carne)				REFERENCES	Programa(Carne),
 		FOREIGN KEY (C_Vuelo)			REFERENCES	Vuelo(Codigo);
 
+ALTER TABLE Aeropuerto
+	ADD	PRIMARY KEY (Codigo);
+
 ALTER TABLE Escala
-	ADD FOREIGN KEY (C_Vuelo)			REFERENCES	Vuelo(Codigo);
+	ADD FOREIGN KEY (C_Vuelo)			REFERENCES	Vuelo(Codigo),
+		FOREIGN KEY (A_Salida)			REFERENCES	Aeropuerto(Codigo),
+		FOREIGN KEY (A_Llegada)			REFERENCES	Aeropuerto(Codigo);
 
 ALTER TABLE Reserva
 	ADD	PRIMARY KEY (Codigo),
@@ -36,3 +41,7 @@ ALTER TABLE Tiquete
 ALTER TABLE Reservaciones
 	ADD FOREIGN KEY (C_Reserva)			REFERENCES	Reserva(Codigo),
 		FOREIGN KEY (C_Usuario)			REFERENCES	Usuario(Correo);
+
+ALTER TABLE Tarjeta
+	ADD PRIMARY KEY (Numero),
+		FOREIGN KEY (C_Reserva)			REFERENCES	Reserva(Codigo);
