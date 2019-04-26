@@ -23,13 +23,13 @@ ALTER TABLE Promocion
 	ADD FOREIGN KEY (Carne)				REFERENCES	Programa(Carne),
 		FOREIGN KEY (C_Vuelo)			REFERENCES	Vuelo(Codigo);
 
-ALTER TABLE Aeropuerto
+ALTER TABLE airports
 	ADD	PRIMARY KEY (Codigo);
 
 ALTER TABLE Escala
 	ADD FOREIGN KEY (C_Vuelo)			REFERENCES	Vuelo(Codigo),
-		FOREIGN KEY (A_Salida)			REFERENCES	Aeropuerto(Codigo),
-		FOREIGN KEY (A_Llegada)			REFERENCES	Aeropuerto(Codigo);
+		FOREIGN KEY (A_Salida)			REFERENCES	airports(Codigo),
+		FOREIGN KEY (A_Llegada)			REFERENCES	airports(Codigo);
 
 ALTER TABLE Reserva
 	ADD	PRIMARY KEY (Codigo),

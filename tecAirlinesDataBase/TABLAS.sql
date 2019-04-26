@@ -43,16 +43,16 @@ CREATE TABLE Aeronave(
 );	
 CREATE TABLE Escala(
 	C_Vuelo			CHAR(7)			NOT NULL,	--Codigo del vuelo al que se asocia la escala
-	A_Salida		CHAR(3)		NOT NULL,
-	A_Llegada		CHAR(3)		NOT NULL,
+	A_Salida		VARCHAR(3)		NOT NULL,
+	A_Llegada		VARCHAR(3)		NOT NULL,
 	Millas			INT				NOT NULL
 );
-CREATE TABLE Aeropuerto(
-	Nombre			VARCHAR(100)	NOT NULL,
-	Codigo			CHAR(3)			NOT NULL,
-	C_Estado		CHAR(3),
-	C_Pais			CHAR(2)			NOT NULL,
-	N_Pais			VARCHAR(20)		NOT NULL
+CREATE TABLE airports(
+	Nombre			VARCHAR(100),
+	Codigo			VARCHAR(3)		NOT NULL,
+	C_Estado		VARCHAR(3),
+	C_Pais			VARCHAR(2)		NOT NULL,
+	N_Pais			VARCHAR(50)		NOT NULL
 );
 CREATE TABLE Tiquete(
 	C_Reserva		INT				NOT NULL,	--Codigo de reserva asociada al tiquete
