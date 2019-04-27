@@ -28,12 +28,13 @@ CREATE TABLE Promocion(
 CREATE TABLE Vuelo(
 	Codigo			CHAR(7)			NOT NULL,	
 	Estado			BIT,
-	Categoria		INT				NOT NULL,
 	Costo			INT				NOT NULL,
-	F_Salida		TIME			NOT NULL,
-	F_Llegada		TIME			NOT NULL,
-	Distancia		INT				NOT NULL,  
-	ID_Aeronave		INT				NOT NULL	--ID del avion que realizara el vuelo
+	F_Salida		DATETIME2,
+	F_Llegada		DATETIME2,
+	Millas			INT				NOT NULL,
+	ID_Aeronave		INT				NOT NULL,	--ID del avion que realizara el vuelo
+	A_Economicos	INT				NOT NULL,
+	A_Ejecutivos	INT				NOT NULL
 );
 CREATE TABLE Aeronave(
 	Identificador	INT				NOT NULL,
@@ -45,7 +46,8 @@ CREATE TABLE Escala(
 	C_Vuelo			CHAR(7)			NOT NULL,	--Codigo del vuelo al que se asocia la escala
 	A_Salida		VARCHAR(3)		NOT NULL,
 	A_Llegada		VARCHAR(3)		NOT NULL,
-	Millas			INT				NOT NULL
+	F_Salida		DATETIME2		NOT NULL,	
+	F_Llegada		DATETIME2		NOT NULL,
 );
 CREATE TABLE airports(
 	Nombre			VARCHAR(100),
@@ -56,6 +58,7 @@ CREATE TABLE airports(
 );
 CREATE TABLE Tiquete(
 	C_Reserva		INT				NOT NULL,	--Codigo de reserva asociada al tiquete
+	Categoria		INT				NOT NULL,
 	N_Asiento		INT				NOT NULL
 );
 CREATE TABLE Reserva(
