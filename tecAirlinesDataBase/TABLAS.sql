@@ -6,7 +6,7 @@ CREATE TABLE Usuario(
 	Carne			INT,
 	Universidad		INT,
 	Correo			VARCHAR(35)		NOT NULL,
-	Contraseña		VARCHAR(10)		NOT NULL
+	ContraseÃ±a		VARCHAR(10)		NOT NULL
 );
 CREATE TABLE Programa(
 	Carne			INT				NOT NULL,
@@ -29,8 +29,8 @@ CREATE TABLE Vuelo(
 	Codigo			CHAR(7)			NOT NULL,	
 	Estado			BIT,
 	Costo			INT				NOT NULL,
-	F_Salida		DATETIME2,
-	F_Llegada		DATETIME2,
+	F_Salida		TIME,
+	F_Llegada		TIME,
 	Millas			INT				NOT NULL,
 	ID_Aeronave		INT				NOT NULL,	--ID del avion que realizara el vuelo
 	A_Economicos	INT				NOT NULL,
@@ -46,8 +46,8 @@ CREATE TABLE Escala(
 	C_Vuelo			CHAR(7)			NOT NULL,	--Codigo del vuelo al que se asocia la escala
 	A_Salida		VARCHAR(3)		NOT NULL,
 	A_Llegada		VARCHAR(3)		NOT NULL,
-	F_Salida		DATETIME2		NOT NULL,	
-	F_Llegada		DATETIME2		NOT NULL,
+	F_Salida		TIME			NOT NULL,	
+	F_Llegada		TIME			NOT NULL,
 );
 CREATE TABLE airports(
 	Nombre			VARCHAR(100),
@@ -73,7 +73,7 @@ CREATE TABLE Reservaciones(
 );
 CREATE TABLE Tarjeta(
 	Numero			INT				NOT NULL,
-	Contraseña		INT				NOT NULL,
+	ContraseÃ±a		INT				NOT NULL,
 	Expiracion		DATE			NOT NULL,
 	Titular			VARCHAR(40)		NOT NULL,
 	C_Reserva		INT				NOT NULL
