@@ -1,39 +1,55 @@
-CREATE PROCEDURE Insertar_Usuario
-AS
+--Glosario
+--0 ak14
+--1 Este correo ya ha sido registrado
+--2 Esta universidad no existe
+
+CREATE PROCEDURE Insertar_Usuario(
+	@Nombre			VARCHAR(20),
+	@Apellido1		VARCHAR(20),
+	@Apellido2		VARCHAR(20),
+	@Telefono		INT,
+	@Carne			INT,
+	@Universidad	INT,
+	@Correo			VARCHAR(35),
+	@Contraseña		VARCHAR(10))
+AS 
 BEGIN
-
-	INSERT INTO Usuario(Nombre,Apellido1,Apellido2,Telefono,Carne,Correo,Contraseña) VALUES(
-	'Nombre',			
-	'Apellido1'	,	               --Se cambian 
-	'Apellido2'	,				   --estos valores
-	'Telefono'	,	               --con datos
-	'Carne'		,	               --a agregar
-	'Correo'		,	
-	'Contraseña'		
-	);
-
+	IF EXISTS (SELECT Correo FROM Usuario WHERE Correo = @Correo)
+			RAISERROR('Este correo ya ha sido registrado',1,1)
+			RETURN 1
+	IF(@Carne != NULL)
+			DECLARE @ID_Universidad INT;
+			IF NOT EXISTS (SELECT Identificador FROM Universidad WHERE  Nombre = @Universidad)
+				RAISERROR('Esta universidad no existe',1,1)
+				RETURN 2
+			SET @ID_Universidad = (
+				SELECT Identificador 
+				FROM Universidad 
+				WHERE  Identificador = @Universidad);
+			INSERT INTO Programa(Carne,ID_Universidad,Millas) VALUES(
+			@Carne,			
+			@ID_Universidad,
+			0)
+	INSERT INTO	Usuario(Nombre, Apellido1, Apellido2, Telefono, Carne, Correo, Contraseña) 
+		VALUES(
+			@Nombre,
+			@Apellido1,
+			@Apellido2,
+			@Telefono,
+			@Carne,
+			@Correo,
+			@Contraseña)
+	RETURN 0
 END;
 
-CREATE PROCEDURE Insertar_Programa
+CREATE PROCEDURE Insertar_Universidad(
+	@Identificador	INT,
+	@Nombre			VARCHAR(10))
 AS
 BEGIN
-	INSERT INTO Programa(Carne,ID_Universidad,Millas) VALUES(
-	'Carne',			
-	'ID_Universidad'	,	       --Se cambian 
-	'Millas'					   --estos valores con datos 
-								   --a agregar		
-	);
-
-END;
-
-CREATE PROCEDURE Insertar_Universidad
-AS
-BEGIN
-	INSERT INTO Universidad(Identificador,Nombre) VALUES(
-	'Identificador',			
-	'Nombre'	       
-	);
-
+	INSERT INTO Universidad(Identificador, Nombre) VALUES(
+	@Identificador,			
+	@Nombre)
 END;
 
 CREATE PROCEDURE Insertar_Promocion
