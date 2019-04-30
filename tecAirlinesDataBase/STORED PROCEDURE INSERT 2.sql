@@ -9,39 +9,48 @@ CREATE PROCEDURE Insertar_Usuario(
 	@Apellido2		VARCHAR(20),
 	@Telefono		INT,
 	@Carne			INT,
-	@Universidad	INT,
+	@Universidad	VARCHAR(4),
 	@Correo			VARCHAR(35),
 	@Contraseña		VARCHAR(10))
 AS 
-BEGIN
 	IF EXISTS (SELECT Correo FROM Usuario WHERE Correo = @Correo)
+		BEGIN
 			RAISERROR('Este correo ya ha sido registrado',1,1)
 			RETURN 1
-	IF(@Carne != NULL)
-			DECLARE @ID_Universidad INT;
-			IF NOT EXISTS (SELECT Identificador FROM Universidad WHERE  Nombre = @Universidad)
-				RAISERROR('Esta universidad no existe',1,1)
-				RETURN 2
+		END
+	IF @Carne IS NOT NULL
+	BEGIN
+		DECLARE @ID_Universidad INT;
+		IF NOT EXISTS (SELECT Identificador FROM Universidad WHERE  Nombre = @Universidad)
+		BEGIN
+			RAISERROR('Esta universidad no existe',1,1)
+			RETURN 2
+		END
+		ELSE
+		BEGIN
+			INSERT INTO	Usuario(Nombre, Apellido1, Apellido2, Telefono, Carne, Universidad, Correo, Contraseña) 
+				VALUES(
+					@Nombre,
+					@Apellido1,
+					@Apellido2,
+					@Telefono,
+					@Carne,
+					@Universidad,
+					@Correo,
+					@Contraseña)
 			SET @ID_Universidad = (
-				SELECT Identificador 
-				FROM Universidad 
-				WHERE  Identificador = @Universidad);
-			INSERT INTO Programa(Carne,ID_Universidad,Millas) VALUES(
-			@Carne,			
-			@ID_Universidad,
-			0)
-	INSERT INTO	Usuario(Nombre, Apellido1, Apellido2, Telefono, Carne, Correo, Contraseña) 
-		VALUES(
-			@Nombre,
-			@Apellido1,
-			@Apellido2,
-			@Telefono,
-			@Carne,
-			@Correo,
-			@Contraseña)
-	RETURN 0
-END;
-
+			SELECT	Identificador 
+			FROM	Universidad 
+			WHERE	Nombre = @Universidad);
+			INSERT INTO Programa(C_Usuario, ID_Universidad, Millas) 
+				VALUES(
+					@Correo,			
+					@ID_Universidad,
+					0)
+			RETURN 0
+		END
+	END
+EXECUTE Insertar_Usuario 'Vinicio','Monge', 'Avendaño', 45369825, 12, 'TEC','c1daaasddyf@afgaf.com', 'contraseña'
 CREATE PROCEDURE Insertar_Universidad(
 	@Identificador	INT,
 	@Nombre			VARCHAR(10))

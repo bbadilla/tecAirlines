@@ -1,13 +1,11 @@
 ALTER TABLE Usuario
-	ADD PRIMARY KEY	(Correo),
-		UNIQUE		(Carne);
+	ADD PRIMARY KEY	(Correo);
 
 ALTER TABLE Universidad
 	ADD PRIMARY KEY	(Identificador);
 
 ALTER TABLE Programa
-	ADD FOREIGN KEY (Carne)				REFERENCES	Usuario(Carne),
-		PRIMARY KEY	(Carne),
+	ADD FOREIGN KEY (C_Usuario)			REFERENCES	Usuario(Correo),
 		FOREIGN KEY (ID_Universidad)	REFERENCES	Universidad(Identificador),
 		DEFAULT		0					FOR			Millas;
 
@@ -20,7 +18,7 @@ ALTER TABLE Vuelo
 		DEFAULT		0					FOR			Estado;
 
 ALTER TABLE Promocion
-	ADD FOREIGN KEY (Carne)				REFERENCES	Programa(Carne),
+	ADD FOREIGN KEY (C_Usuario)			REFERENCES	Usuario(Correo),
 		FOREIGN KEY (C_Vuelo)			REFERENCES	Vuelo(Codigo);
 
 ALTER TABLE airports
