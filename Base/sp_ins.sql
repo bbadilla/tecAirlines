@@ -1,13 +1,13 @@
--- EXECUTE sp_ins_usuario 'Maikel','Matamoroz','Zuñiga', 89754825, 1551, 'TEC', 'usussarrio1@hotmail.com', 'monkey'
+-- EXECUTE sp_ins_usuario 'Maikel','Matamoroz','ZuÃ±iga', 89754825, 1551, 'TEC', 'usussarrio1@hotmail.com', 'monkey'
 CREATE PROCEDURE sp_ins_usuario(
 	@Nombre			VARCHAR(20),
 	@Apellido1		VARCHAR(20),
 	@Apellido2		VARCHAR(20),
 	@Telefono		INT,
 	@Carne			INT,
-	@Universidad	VARCHAR(4),
+	@Universidad		VARCHAR(4),
 	@Correo			VARCHAR(35),
-	@Contraseña		VARCHAR(10))
+	@ContraseÃ±a		VARCHAR(10))
 AS 
 	IF EXISTS (SELECT Correo FROM Usuario WHERE Correo = @Correo)
 		BEGIN
@@ -24,12 +24,12 @@ AS
 		END
 		IF EXISTS (SELECT Correo FROM Usuario WHERE  Carne = @Carne)
 		BEGIN
-			RAISERROR('Este número de carné ya ha sido registrado',1,1)
+			RAISERROR('Este nÃºmero de carnÃ© ya ha sido registrado',1,1)
 			RETURN 3
 		END
 		ELSE
 		BEGIN
-			INSERT INTO	Usuario(Nombre, Apellido1, Apellido2, Telefono, Carne, Universidad, Correo, Contraseña) 
+			INSERT INTO	Usuario(Nombre, Apellido1, Apellido2, Telefono, Carne, Universidad, Correo, ContraseÃ±a) 
 				VALUES(
 					@Nombre,
 					@Apellido1,
@@ -38,7 +38,7 @@ AS
 					@Carne,
 					@Universidad,
 					@Correo,
-					@Contraseña)
+					@ContraseÃ±a)
 			SET @ID_Universidad = (
 			SELECT	Identificador 
 			FROM	Universidad 
@@ -53,7 +53,7 @@ AS
 	END
 	ELSE
 	BEGIN
-		INSERT INTO	Usuario(Nombre, Apellido1, Apellido2, Telefono, Carne, Universidad, Correo, Contraseña) 
+		INSERT INTO	Usuario(Nombre, Apellido1, Apellido2, Telefono, Carne, Universidad, Correo, ContraseÃ±a) 
 				VALUES(
 					@Nombre,
 					@Apellido1,
@@ -62,7 +62,7 @@ AS
 					@Carne,
 					@Universidad,
 					@Correo,
-					@Contraseña)
+					@ContraseÃ±a)
 	RETURN 0
 	END
 --EXECUTE sp_ins_vuelo 98784, 458445, '09/11/19 13:30:00.0', '10/11/19 13:30:00.0', 1, 1
