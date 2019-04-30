@@ -10,11 +10,11 @@ CREATE TABLE Usuario(
 );
 CREATE TABLE Programa(
 	C_Usuario		VARCHAR(35)			NOT NULL,
-	ID_Universidad	INT					NOT NULL,	--ID de la universidad donde esta matriculado
+	ID_Universidad		INT					NOT NULL,	--ID de la universidad donde esta matriculado
 	Millas			INT
 );
 CREATE TABLE Universidad(
-	Identificador	INT	IDENTITY(1,1),
+	Identificador		INT				IDENTITY(1,1),
 	Nombre			VARCHAR(4)			NOT NULL	
 );
 CREATE TABLE Promocion(
@@ -36,11 +36,11 @@ CREATE TABLE Vuelo(
 	ID_Aeronave		INT				NOT NULL	--ID del avion que realizara el vuelo
 );
 CREATE TABLE Aeronave(
-	Identificador	INT					IDENTITY(1,1),
+	Identificador		INT				IDENTITY(1,1),
 	Modelo			VARCHAR(20)			NOT NULL,
 	Capacidad		INT				NOT NULL,
-	A_Economicos	INT					NOT NULL,
-	A_Ejecutivos	INT					NOT NULL
+	A_Economicos		INT				NOT NULL,
+	A_Ejecutivos		INT				NOT NULL
 	--Falta incluir el "mapa" del avion pero no se como lo vamos a guardar, por lo que no se que tipo ponerle
 );	
 CREATE TABLE Escala(
