@@ -10,7 +10,7 @@ CREATE TABLE Usuario(
 );
 CREATE TABLE Programa(
 	C_Usuario		VARCHAR(35)			NOT NULL,
-	ID_Universidad		INT					NOT NULL,	--ID de la universidad donde esta matriculado
+	ID_Universidad		INT				NOT NULL,	--ID de la universidad donde esta matriculado
 	Millas			INT
 );
 CREATE TABLE Universidad(
