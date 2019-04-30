@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Carros Web API</title>
+</head>
+<body>
+
+    <div>
+        <h2>Carros</h2>
+        <ul id="carros" />
+    </div>
+    <div>
+        <h2>Busqueda por ID</h2>
+        <input type="text" id="carId" size="5" />
+        <input type="button" value="Buscar" onclick="obtener();" />
+        <p id="carro" />
+    </div>
+
+
+    <meta name="viewport" content="width=device-width" />
+    <script src="Scripts/jquery-3.3.1.js"></script>
+    <script>
+        var uri = 'api/user/';
+        function obtener() {
+            // Send an AJAX request
+            $.getJSON(uri)
+                .done(function (data) {
+
+                    $.each(data, function (key, item) {
+                        $('<li>', { text: formatItem(item) }).appendTo($('#carros'));
+                    });
+                });
+        }
+        function formatItem(item) {
+            return item.Nombre + '-' + item.Apellido1 + '-' + item.Correo;
+        }
+        function find() {
+            var id = $('#carId').val();
+            $.getJSON(uri + '/' + id + '/')
+                .done(function (data) {
+                    $('#carro').text(formatItem(data));
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#carro').text('Error: ' + err);
+                });
+        }
+    </script>
+</body>
+</html>

@@ -101,3 +101,6 @@ C:\Users\Bryan\Desktop\tecAirlinesService\tecAirlinesServices\tecAirlinesService
 C:\Users\Bryan\Desktop\tecAirlinesService\tecAirlinesServices\tecAirlinesServices\obj\Debug\tecAirlinesServices.csproj.CopyComplete
 C:\Users\Bryan\Desktop\tecAirlinesService\tecAirlinesServices\tecAirlinesServices\obj\Debug\tecAirlinesServices.dll
 C:\Users\Bryan\Desktop\tecAirlinesService\tecAirlinesServices\tecAirlinesServices\obj\Debug\tecAirlinesServices.pdb
+C:\Users\Bryan\Desktop\tecAirlinesService\tecAirlinesServices\tecAirlinesServices\bin\System.Web.Cors.dll
+C:\Users\Bryan\Desktop\tecAirlinesService\tecAirlinesServices\tecAirlinesServices\bin\System.Web.Http.Cors.dll
+C:\Users\Bryan\Desktop\tecAirlinesService\tecAirlinesServices\tecAirlinesServices\bin\System.Web.Http.Cors.xml

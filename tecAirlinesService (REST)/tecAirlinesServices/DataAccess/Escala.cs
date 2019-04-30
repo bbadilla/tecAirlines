@@ -15,10 +15,13 @@ namespace DataAccess
     public partial class Escala
     {
         public string C_Vuelo { get; set; }
-        public string Salida { get; set; }
-        public string Llegada { get; set; }
-        public int Millas { get; set; }
+        public string A_Salida { get; set; }
+        public string A_Llegada { get; set; }
+        public System.DateTime F_Salida { get; set; }
+        public System.DateTime F_Llegada { get; set; }
     
+        public virtual airport airport { get; set; }
+        public virtual airport airport1 { get; set; }
         public virtual Vuelo Vuelo { get; set; }
     }
 }

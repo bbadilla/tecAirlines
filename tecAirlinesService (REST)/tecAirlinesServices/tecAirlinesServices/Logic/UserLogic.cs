@@ -80,6 +80,7 @@ namespace tecAirlinesServices.Logic
                     user.Apellido2 = userx.Apellido2;
                     user.Telefono = userx.Telefono;
                     user.Carne = userx.Carne;
+                    user.Universidad = userx.Universidad;
                     user.Correo = userx.Correo;
                     user.Contraseña = userx.Contraseña;
                     return user;
@@ -117,18 +118,20 @@ namespace tecAirlinesServices.Logic
         {
             using (tecAirlinesEntities entities = new tecAirlinesEntities())
             {
-                Usuario newUser = new Usuario();
-                newUser.Nombre = data.Nombre;
-                newUser.Apellido1 = data.Apellido1;
-                newUser.Apellido2 = data.Apellido2;
-                newUser.Telefono = data.Telefono;
-                newUser.Carne = data.Carne;
-                newUser.Correo = data.Correo;
-                newUser.Contraseña = data.Contraseña;
+                //Usuario newUser = new Usuario();
+                //newUser.Nombre = data.Nombre;
+                //newUser.Apellido1 = data.Apellido1;
+                //newUser.Apellido2 = data.Apellido2;
+                //newUser.Telefono = data.Telefono;
+                //newUser.Carne = data.Carne;
+                //newUser.Correo = data.Correo;
+                //newUser.Contraseña = data.Contraseña;
                 try
                 {
-                    entities.Usuarios.Add(newUser);
-                    entities.SaveChanges();
+                    //entities.Usuarios.Add(newUser);
+                    //entities.SaveChanges();
+                   
+                    int entity = entities.Insertar_Usuario(data.Nombre, data.Apellido1, data.Apellido2, data.Telefono, data.Carne, data.Universidad, data.Correo, data.Contraseña);
                     return true;
                 }
                 catch (Exception e)
@@ -179,6 +182,7 @@ namespace tecAirlinesServices.Logic
                     user.Telefono = data.Telefono;
                     user.Carne = data.Carne;
                     user.Correo = data.Correo;
+                    user.Universidad = data.Universidad;
                     user.Contraseña = data.Contraseña;
                     entities.SaveChanges();
                     return true;

@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>index</title>
+    <script src="Scripts/jquery-3.3.1.js"></script>
+    <script>
+
+        function send() {
+            var person = {
+                Nombre: $("#Nombre").val(),
+                Apellido1: $("#Apellido1").val(),
+                Apellido2: $("#Apellido2").val(),
+                Telefono: $("#Telefono").val(),
+                Carne: $("#Carne").val(),
+                Universidad: $("#Universidad").val(),
+                Correo: $("#Correo").val(),
+                Contraseña: $("#Contraseña").val()
+            }
+
+            $('#target').html('sending..');
+
+            $.ajax({
+                url: '/api/user/add/',
+                type: 'post',
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                    $('#target').html(data.msg);
+                },
+                data: JSON.stringify(person)
+            });
+        }
+            
+
+    </script>
+</head>
+<body>
+    <div>
+        <input type="text" id="Nombre" name="Nombre" value="" /><br />
+        <input type="text" id="Apellido1" name="Apellido1" value="" /><br />
+        <input type="text" id="Apellido2" name="Apellido2" value="" /><br />
+        <input type="text" id="Telefono" name="Telefono" value="" /><br />
+        <input type="text" id="Carne" name="Carne" value="" /><br />
+        <input type="text" id="Universidad" name="Universidad" value="" /><br />
+        <input type="text" id="Correo" name="Correo" value="" /><br />
+        <input type="text" id="Contraseña" name="Contraseña" value="" /><br />
+        <input type="button" id="btn1" name="btn1" value="SignIn" onclick="send()" ; />
+    </div>
+</body>
+</html>

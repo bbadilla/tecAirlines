@@ -17,6 +17,7 @@ namespace DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Reserva()
         {
+            this.Tarjetas = new HashSet<Tarjeta>();
             this.Tiquetes = new HashSet<Tiquete>();
             this.Usuarios = new HashSet<Usuario>();
         }
@@ -27,6 +28,8 @@ namespace DataAccess
         public string C_Vuelo { get; set; }
     
         public virtual Vuelo Vuelo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tarjeta> Tarjetas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tiquete> Tiquetes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

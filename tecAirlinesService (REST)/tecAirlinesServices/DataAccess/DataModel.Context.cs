@@ -12,6 +12,8 @@ namespace DataAccess
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class tecAirlinesEntities : DbContext
     {
@@ -26,13 +28,137 @@ namespace DataAccess
         }
     
         public virtual DbSet<Aeronave> Aeronaves { get; set; }
-        public virtual DbSet<Programa> Programas { get; set; }
+        public virtual DbSet<airport> airports { get; set; }
         public virtual DbSet<Reserva> Reservas { get; set; }
+        public virtual DbSet<Tarjeta> Tarjetas { get; set; }
         public virtual DbSet<Universidad> Universidads { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
         public virtual DbSet<Vuelo> Vueloes { get; set; }
         public virtual DbSet<Escala> Escalas { get; set; }
+        public virtual DbSet<Programa> Programas { get; set; }
         public virtual DbSet<Promocion> Promocions { get; set; }
         public virtual DbSet<Tiquete> Tiquetes { get; set; }
+    
+        public virtual int Insertar_Aeronave()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insertar_Aeronave");
+        }
+    
+        public virtual int Insertar_Tiquete()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insertar_Tiquete");
+        }
+    
+        public virtual int Insertar_Universidad(Nullable<int> identificador, string nombre)
+        {
+            var identificadorParameter = identificador.HasValue ?
+                new ObjectParameter("Identificador", identificador) :
+                new ObjectParameter("Identificador", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insertar_Universidad", identificadorParameter, nombreParameter);
+        }
+    
+        public virtual int Insertar_Usuario(string nombre, string apellido1, string apellido2, Nullable<int> telefono, Nullable<int> carne, string universidad, string correo, string contraseña)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var apellido1Parameter = apellido1 != null ?
+                new ObjectParameter("Apellido1", apellido1) :
+                new ObjectParameter("Apellido1", typeof(string));
+    
+            var apellido2Parameter = apellido2 != null ?
+                new ObjectParameter("Apellido2", apellido2) :
+                new ObjectParameter("Apellido2", typeof(string));
+    
+            var telefonoParameter = telefono.HasValue ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(int));
+    
+            var carneParameter = carne.HasValue ?
+                new ObjectParameter("Carne", carne) :
+                new ObjectParameter("Carne", typeof(int));
+    
+            var universidadParameter = universidad != null ?
+                new ObjectParameter("Universidad", universidad) :
+                new ObjectParameter("Universidad", typeof(string));
+    
+            var correoParameter = correo != null ?
+                new ObjectParameter("Correo", correo) :
+                new ObjectParameter("Correo", typeof(string));
+    
+            var contraseñaParameter = contraseña != null ?
+                new ObjectParameter("Contraseña", contraseña) :
+                new ObjectParameter("Contraseña", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insertar_Usuario", nombreParameter, apellido1Parameter, apellido2Parameter, telefonoParameter, carneParameter, universidadParameter, correoParameter, contraseñaParameter);
+        }
+    
+        public virtual int sp_ins_escala(string c_Vuelo, string a_Salida, string a_Llegada, Nullable<System.TimeSpan> f_Salida, Nullable<System.TimeSpan> f_Llegada)
+        {
+            var c_VueloParameter = c_Vuelo != null ?
+                new ObjectParameter("C_Vuelo", c_Vuelo) :
+                new ObjectParameter("C_Vuelo", typeof(string));
+    
+            var a_SalidaParameter = a_Salida != null ?
+                new ObjectParameter("A_Salida", a_Salida) :
+                new ObjectParameter("A_Salida", typeof(string));
+    
+            var a_LlegadaParameter = a_Llegada != null ?
+                new ObjectParameter("A_Llegada", a_Llegada) :
+                new ObjectParameter("A_Llegada", typeof(string));
+    
+            var f_SalidaParameter = f_Salida.HasValue ?
+                new ObjectParameter("F_Salida", f_Salida) :
+                new ObjectParameter("F_Salida", typeof(System.TimeSpan));
+    
+            var f_LlegadaParameter = f_Llegada.HasValue ?
+                new ObjectParameter("F_Llegada", f_Llegada) :
+                new ObjectParameter("F_Llegada", typeof(System.TimeSpan));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ins_escala", c_VueloParameter, a_SalidaParameter, a_LlegadaParameter, f_SalidaParameter, f_LlegadaParameter);
+        }
+    
+        public virtual int sp_ins_vuelo(string codigo, Nullable<int> costo, Nullable<System.TimeSpan> f_Salida, Nullable<System.TimeSpan> f_Llegada, Nullable<int> millas, Nullable<int> iD_Aeronave, Nullable<int> a_Economicos, Nullable<int> a_Ejecutivos)
+        {
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("Codigo", codigo) :
+                new ObjectParameter("Codigo", typeof(string));
+    
+            var costoParameter = costo.HasValue ?
+                new ObjectParameter("Costo", costo) :
+                new ObjectParameter("Costo", typeof(int));
+    
+            var f_SalidaParameter = f_Salida.HasValue ?
+                new ObjectParameter("F_Salida", f_Salida) :
+                new ObjectParameter("F_Salida", typeof(System.TimeSpan));
+    
+            var f_LlegadaParameter = f_Llegada.HasValue ?
+                new ObjectParameter("F_Llegada", f_Llegada) :
+                new ObjectParameter("F_Llegada", typeof(System.TimeSpan));
+    
+            var millasParameter = millas.HasValue ?
+                new ObjectParameter("Millas", millas) :
+                new ObjectParameter("Millas", typeof(int));
+    
+            var iD_AeronaveParameter = iD_Aeronave.HasValue ?
+                new ObjectParameter("ID_Aeronave", iD_Aeronave) :
+                new ObjectParameter("ID_Aeronave", typeof(int));
+    
+            var a_EconomicosParameter = a_Economicos.HasValue ?
+                new ObjectParameter("A_Economicos", a_Economicos) :
+                new ObjectParameter("A_Economicos", typeof(int));
+    
+            var a_EjecutivosParameter = a_Ejecutivos.HasValue ?
+                new ObjectParameter("A_Ejecutivos", a_Ejecutivos) :
+                new ObjectParameter("A_Ejecutivos", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ins_vuelo", codigoParameter, costoParameter, f_SalidaParameter, f_LlegadaParameter, millasParameter, iD_AeronaveParameter, a_EconomicosParameter, a_EjecutivosParameter);
+        }
     }
 }

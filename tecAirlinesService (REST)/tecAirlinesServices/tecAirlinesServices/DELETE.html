@@ -1,0 +1,33 @@
+﻿<html>
+<head runat="server">
+    <script src="Scripts/jquery-3.3.1.js"></script>>
+    <script>
+
+        $(document).ready(function () {
+            $("#Save").click(function () {
+                var person = new Object();
+                person.Correo = $('#Correo').val();
+
+                $.ajax({
+                    url: 'api/user/delete/' + person.Correo + '/',
+                    type: 'DELETE',
+                    dataType: 'json',
+                    data: person,
+                    success: function (data, textStatus, xhr) {
+                        console.log(data);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log('Error in Operation');
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <form name="form1" id="form1">
+        Name:- <input type="text" name="Correo" id="Correo" />
+        <input type="button" id="Save" value="Save Data" />
+    </form>
+</body>
+    </html>  

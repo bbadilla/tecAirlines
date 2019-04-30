@@ -14,18 +14,11 @@ namespace DataAccess
     
     public partial class Programa
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Programa()
-        {
-            this.Promocions = new HashSet<Promocion>();
-        }
-    
-        public int Carne { get; set; }
+        public string C_Usuario { get; set; }
         public int ID_Universidad { get; set; }
         public Nullable<int> Millas { get; set; }
     
         public virtual Universidad Universidad { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Promocion> Promocions { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

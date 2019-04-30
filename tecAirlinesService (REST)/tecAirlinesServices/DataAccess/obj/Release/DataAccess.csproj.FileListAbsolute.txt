@@ -1,0 +1,12 @@
+C:\Users\Bryan\Desktop\tecAirlinesService\tecAirlinesServices\DataAccess\bin\Release\DataAccess.dll.config
+C:\Users\Bryan\Desktop\tecAirlinesService\tecAirlinesServices\DataAccess\bin\Release\DataAccess.dll
+C:\Users\Bryan\Desktop\tecAirlinesService\tecAirlinesServices\DataAccess\bin\Release\DataAccess.pdb
+C:\Users\Bryan\Desktop\tecAirlinesService\tecAirlinesServices\DataAccess\bin\Release\EntityFramework.dll
+C:\Users\Bryan\Desktop\tecAirlinesService\tecAirlinesServices\DataAccess\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Bryan\Desktop\tecAirlinesService\tecAirlinesServices\DataAccess\bin\Release\EntityFramework.xml
+C:\Users\Bryan\Desktop\tecAirlinesService\tecAirlinesServices\DataAccess\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Bryan\Desktop\tecAirlinesService\tecAirlinesServices\DataAccess\obj\Release\DataAccess.csprojAssemblyReference.cache
+C:\Users\Bryan\Desktop\tecAirlinesService\tecAirlinesServices\DataAccess\obj\Release\DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Bryan\Desktop\tecAirlinesService\tecAirlinesServices\DataAccess\obj\Release\DataAccess.csproj.CopyComplete
+C:\Users\Bryan\Desktop\tecAirlinesService\tecAirlinesServices\DataAccess\obj\Release\DataAccess.dll
+C:\Users\Bryan\Desktop\tecAirlinesService\tecAirlinesServices\DataAccess\obj\Release\DataAccess.pdb

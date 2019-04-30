@@ -15,6 +15,7 @@ namespace DataAccess
     public partial class Tiquete
     {
         public int C_Reserva { get; set; }
+        public int Categoria { get; set; }
         public int N_Asiento { get; set; }
     
         public virtual Reserva Reserva { get; set; }

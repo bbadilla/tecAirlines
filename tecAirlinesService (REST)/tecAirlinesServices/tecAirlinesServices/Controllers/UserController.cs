@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using DataAccess;
 using tecAirlinesServices;
 using tecAirlinesServices.Logic;
@@ -11,6 +12,7 @@ using tecAirlinesServices.Models;
 
 namespace tecAirlinesServices.Controllers
 {
+    [EnableCors(origins: "http://localhost:55810", headers: "*", methods: "*")]
     public class UsersController : ApiController
     {
         private UserLogic userLogic = new UserLogic();
@@ -97,7 +99,7 @@ namespace tecAirlinesServices.Controllers
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        [Route("api/user/update")]
+        //[Route("api/user/update")]
         [HttpPut]
         public IHttpActionResult UpdateEmployee([FromBody] UserData data)
         {

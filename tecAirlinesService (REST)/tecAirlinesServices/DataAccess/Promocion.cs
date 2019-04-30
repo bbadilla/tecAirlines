@@ -14,14 +14,14 @@ namespace DataAccess
     
     public partial class Promocion
     {
-        public int Carne { get; set; }
+        public string C_Usuario { get; set; }
         public string C_Vuelo { get; set; }
-        public System.TimeSpan F_Inicio { get; set; }
-        public System.TimeSpan F_Fin { get; set; }
+        public System.DateTime F_Inicio { get; set; }
+        public System.DateTime F_Fin { get; set; }
         public int Porcentaje { get; set; }
         public string Imagen { get; set; }
     
-        public virtual Programa Programa { get; set; }
+        public virtual Usuario Usuario { get; set; }
         public virtual Vuelo Vuelo { get; set; }
     }
 }

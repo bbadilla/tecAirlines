@@ -1,0 +1,46 @@
+﻿<html>
+<head runat="server">
+    <script src="Scripts/jquery-3.3.1.js"></script>>
+    <script>
+
+        $(document).ready(function () {
+            $("#Save").click(function () {
+                var data = {
+                    Nombre: $("#Nombre").val(),
+                    Apellido1: $("#Apellido1").val(),
+                    Apellido2: $("#Apellido2").val(),
+                    Telefono: $("#Telefono").val(),
+                    Carne: $("#Carne").val(),
+                    Correo: $("#Correo").val(),
+                    Contraseña: $("#Contraseña").val()
+                }
+
+                var json = JSON.stringify(data)
+
+                $.ajax({
+                    url: '/api/users/' + data.Correo + '/',
+                    type: 'PUT',
+                    contentType: "application/json; charset=utf-8",
+                    data: json,
+                    success: function (results) {
+
+                    }
+                })
+                });
+            });
+        
+    </script>
+</head>
+<body>
+    <form name="form1" id="form1">
+        <input type="text" id="Nombre" name="Nombre" value="" /><br />
+        <input type="text" id="Apellido1" name="Apellido1" value="" /><br />
+        <input type="text" id="Apellido2" name="Apellido2" value="" /><br />
+        <input type="text" id="Telefono" name="Telefono" value="" /><br />
+        <input type="text" id="Carne" name="Carne" value="" /><br />
+        <input type="text" id="Correo" name="Correo" value="" /><br />
+        <input type="text" id="Contraseña" name="Contraseña" value="" /><br />
+        <input type="button" id="Save" value="Save Data" />
+    </form>
+</body>
+</html>  

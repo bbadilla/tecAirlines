@@ -24,12 +24,13 @@ namespace DataAccess
     
         public string Codigo { get; set; }
         public Nullable<bool> Estado { get; set; }
-        public int Categoria { get; set; }
         public int Costo { get; set; }
-        public System.TimeSpan F_Salida { get; set; }
-        public System.TimeSpan F_Llegada { get; set; }
-        public int Distancia { get; set; }
+        public Nullable<System.DateTime> F_Salida { get; set; }
+        public Nullable<System.DateTime> F_Llegada { get; set; }
+        public int Millas { get; set; }
         public int ID_Aeronave { get; set; }
+        public int A_Economicos { get; set; }
+        public int A_Ejecutivos { get; set; }
     
         public virtual Aeronave Aeronave { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
