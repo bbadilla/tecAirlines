@@ -167,13 +167,7 @@ namespace tecAirlinesServices.Logic
             {
                 try
                 {
-                    var reservation = entities.Reservas.Find(data.Codigo);
-
-                    reservation.Codigo = data.Codigo;
-                    reservation.Chequeo = data.Chequeo;
-                    reservation.Equipaje = data.Equipaje;
-                    reservation.C_Vuelo = data.C_Vuelo;
-
+                    int entity = entities.udsp_up_reserva(data.Codigo, data.Equipaje);
                     return true;
                 }
                 catch (Exception e)

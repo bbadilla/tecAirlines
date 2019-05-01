@@ -1,58 +1,103 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<title>Buscar</title>
-	<meta name="description" content="Travel">
-	<link href="https://fonts.googleapis.com/css?family=Hind:300" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Secular+One" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:900" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="css/buscar.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar</title>
+    <meta name="description" content="Travel">
+    <link href="https://fonts.googleapis.com/css?family=Hind:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Secular+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:900" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="css/buscar.css" rel="stylesheet">
+    
 </head>
 <body>
-  <header>
-     
-      
-    
-   </header> 
-    
-  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-     $('.menu-toggle').click(function(){
-       $('nav').toggleClass('active')
-     })
-  }) </script>
-  
-  <div id="page1">
-    
- <img alt="plane" class="plane" src="image/plane.png">
-   
-    
-  <div class="right">
-    <h1 class="book">Busca </h1> 
-    <h1 class="travel">& Viaja</h1>
-     <h4> Con aerolineas TEC, viaja donde quieras</h4>
-      			<form class="reservation">   
-     <fieldset>
-        <label> SALIDA</label>
-              <div>
-                <input type="text" class = "c" id="salida" name="salida" size="20" value="" placeholder="Kabul, Afganistán" required /></div>
-       
-     <label> DESTINO</label>
-              <div>
-                <input type="text" class = "c" id="destino" name="destino" size="20" value="" placeholder="Kabul, Afganistán" required /></div>
 
-       
-      <div class="button">
-       <input type="button" class="btn" value="BUSQUEDA" />
-		 </div>
-       
-   </fieldset></form>
-  </div>
-</div>
+    <header></header>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <script src="Scripts/jquery-3.3.1.js"></script>
+    <script>
+
+        var uri = 'http://localhost:57363/api/flight';
+        //$(document).ready(function () {
+        //    // Send an AJAX request
+        //    $.getJSON(uri)
+        //        .done(function (data) {
+
+        //            $.each(data, function (key, item) {
+        //                $('<li>', { text: formatItem(item) }).appendTo($('#carros'));
+        //            });
+        //        });
+        //});
+        function formatItem(item) {
+            return item.Codigo + ' '+ item.Estado +' '+ item.C_Economico + ' ' + item.C_Ejecutivo +' '+ item.F_Salida +' '+ item.F_Llegada+' '
+        }
+        function find() {
+            var id = $('#A_Salida').val();
+            var id1 = $('#A_Llegada').val();
+            $.getJSON(uri + '/' + id + '/' + id1 + '/')
+                .done(function (data) {
+                    $('#carro').text(formatItem(data));
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#carro').text('Error: ' + err);
+                });
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.menu-toggle').click(function () {
+                $('nav').toggleClass('active')
+            })
+        })
+    </script>
+
+    <div id="page1">
+
+        <img alt="plane" class="plane" src="image/plane.png">
+
+
+        <div class="right">
+            <h1 class="book">Busca </h1>
+            <h1 class="travel">& Viaja</h1>
+            <h4> Con aerolineas TEC, viaja donde quieras</h4>
+            <div class="reservation">
+                <fieldset>
+                    <label> SALIDA</label>
+                    <div>
+                        <input type="text" class="c" id="A_Salida" name="salida" size="20" value="" placeholder="Kabul, Afganistán" required />
+                    </div>
+
+                    <label> DESTINO</label>
+                    <div>
+                        <input type="text" class="c" id="A_Llegada" name="destino" size="20" value="" placeholder="Kabul, Afganistán" required />
+                    </div>
+
+                    <div class="button">
+                        <input type="button" onclick="find()" class="btn" value="BUSQUEDA" />
+                    </div>
+
+                    <div class="button">
+                        <input type="button" onclick="window.location='/reserva.html'" class="btn" value="SIGUIENTE" />
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <div style="font-size:160%;">
+        <div style="color:black">
+            <div>
+
+                <ul id="carros" style="color:black " />
+                <p id="carro"  style="text-align:center;"/>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

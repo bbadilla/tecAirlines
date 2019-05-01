@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<title>Reserva</title>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=PT+Sans:400" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css" />
+
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="css/reserva.css" />
+
+
+
+</head>
+
+<body>
+    <script src="Scripts/jquery-3.3.1.js"></script>
+    <script>
+
+        function send() {
+            var person = {
+                C_Usuario: $("#C_Usuario").val(),
+                C_Vuelo: $("#C_Vuelo").val(),
+                A_Economico: $("#A_Economico").val(),
+                A_Ejecutivo: $("#A_Ejecutivo").val()
+            }
+
+            $('#target').html('sending..');
+
+            $.ajax({
+                url: 'api/reservation/add/',
+                type: 'post',
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                    $('#target').html(data.msg);
+                    alert("Registro valido");
+                },
+                data: JSON.stringify(person)
+            });
+        }
+
+
+    </script>
+    <div id="booking" class="section">
+        <div class="section-center">
+            <div class="container">
+                <div class="row">
+                    <div class="booking-form">
+                        <form name="reserva">
+                            <div class="form-group">
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <span  class="form-label">Correo de Usuario </span>
+                                        <input id="C_Usuario" class="form-control" type="text" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <span  class="form-label">Codigo de Vuelo</span>
+                                        <input id="C_Vuelo" class="form-control" type="text" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!--<div class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="form-label">Fecha salida</span>
+                                        <input class="form-control" type="date" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="form-label">Fecha llegada</span>
+                                        <input class="form-control" type="date" required>
+                                    </div>
+                                </div>-->
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <span  class="form-label">A Economicos</span>
+                                        <select id="A_Economico" class="form-control">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                        </select>
+                                        <span class="select-arrow"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <span   class="form-label">A Ejecutivos</span>
+                                        <select id="A_Ejecutivo" class="form-control">
+                                            <option>0</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                        </select>
+                                        <span class="select-arrow"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!--<div class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="form-label">Clase</span>
+                                        <select class="form-control">
+                                            <option>Economica</option>
+                                            <option>Negocios</option>
+                                            <option>Primera clase</option>
+                                        </select>
+                                        <span class="select-arrow"></span>
+                                    </div>
+                                </div>-->
+                                <div class="col-md-3">
+                                    <div class="button">
+                                        <input type="button" onclick="send()" class="btn" value="SIGUIENTE" />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

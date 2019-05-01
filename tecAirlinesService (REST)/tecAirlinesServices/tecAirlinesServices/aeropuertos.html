@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <title>Document</title>
+    <!-- <link href="css/promos.css" rel="stylesheet"> -->
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700|Libre+Baskerville:400,400italic' rel='stylesheet' type='text/css'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar</title>
+    <meta name="description" content="Travel">
+    <link href="https://fonts.googleapis.com/css?family=Hind:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Secular+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:900" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+
+
+<body>
+    <div>
+        <p class="cc" style="text-align:center">
+            Aeropuerto _____/ Codigo _____/ Pais
+        </p>
+        <ul id="carros" style="color:black " />
+        <p class="cc" id="carro" style="text-align:center;" />
+
+    </div>
+ 
+    <div>
+
+        <input type="button" onclick="obtener()" class="btn" value="VER AEROPUERTOS" />
+
+    </div>
+
+    <script src="Scripts/jquery-3.3.1.js"></script>
+    <script>
+        var uri = 'api/airport/';
+        function obtener() {
+            // Send an AJAX request
+            $.getJSON(uri)
+                .done(function (data) {
+
+                    $.each(data, function (key, item) {
+                        $('<li>', { text: formatItem(item) }).appendTo($('#carros'));
+                    });
+                });
+        }
+        function formatItem(item) {
+            return item.Nombre + ' _____/' + item.Codigo + '_____/' + item.N_Pais;
+        }
+        function find() {
+            var id = $('#carId').val();
+            $.getJSON(uri + '/' + id + '/')
+                .done(function (data) {
+                    $('#carro').text(formatItem(data));
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#carro').text('Error: ' + err);
+                });
+        }
+    </script>
+
+
+</body>
+</html>

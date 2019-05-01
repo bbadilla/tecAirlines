@@ -19,6 +19,8 @@ namespace DataAccess
         {
             this.Escalas = new HashSet<Escala>();
             this.Escalas1 = new HashSet<Escala>();
+            this.Vueloes = new HashSet<Vuelo>();
+            this.Vueloes1 = new HashSet<Vuelo>();
         }
     
         public string Nombre { get; set; }
@@ -31,5 +33,9 @@ namespace DataAccess
         public virtual ICollection<Escala> Escalas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Escala> Escalas1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Vuelo> Vueloes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Vuelo> Vueloes1 { get; set; }
     }
 }

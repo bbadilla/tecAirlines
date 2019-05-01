@@ -63,14 +63,15 @@ namespace tecAirlinesServices.Logic
         /// </summary>
         /// <param name="correo"></param>
         /// <returns></returns>
-        public UserData GetUser(string correo)
+        public UserData GetUser(string correo, string contraseña)
         {
             UserData user = new UserData();
             using (tecAirlinesEntities entities = new tecAirlinesEntities())
             {
                 try
                 {
-                    if (!this.ExistUser(correo))
+                    string id = entities.Usuarios.Where(e => e.Contraseña == contraseña).ToList().First().Correo;
+                    if (!this.ExistUser(correo) || !this.ExistUser(id))
                     {
                         user = null;
                         return user;
@@ -107,6 +108,28 @@ namespace tecAirlinesServices.Logic
                 var i = entities.Usuarios.Find(correo);
                 if (i == null) return false;
                 else return true;
+
+               
+            }
+        }
+
+      
+
+
+        /// <summary>
+        /// //Verifica si un usuario existe
+        /// </summary>
+        /// <param name="correo"></param>
+        /// <returns></returns>
+        public bool ExistProgram(string correo, string contraseña)
+        {
+            using (tecAirlinesEntities entities = new tecAirlinesEntities())
+            {
+                var i = entities.Programas.Find(correo);
+                if (i == null) return false;
+                else return true;
+
+
             }
         }
 
@@ -132,7 +155,7 @@ namespace tecAirlinesServices.Logic
                     //entities.Usuarios.Add(newUser);
                     //entities.SaveChanges();
                    
-                    int entity = entities.Insertar_Usuario(data.Nombre, data.Apellido1, data.Apellido2, data.Telefono, data.Carne, data.Universidad, data.Correo, data.Contraseña);
+                    int entity = entities.udsp_ins_usuario(data.Nombre, data.Apellido1, data.Apellido2, data.Telefono, data.Carne, data.Universidad, data.Correo, data.Contraseña);
                     return true;
                 }
                 catch (Exception e)
@@ -156,7 +179,9 @@ namespace tecAirlinesServices.Logic
                     var ms = entities.Usuarios.Find(correo);
                     entities.Usuarios.Remove(ms);
                     entities.SaveChanges();
+
                     return true;
+
                 }
                 catch (Exception e)
                 {
@@ -177,14 +202,14 @@ namespace tecAirlinesServices.Logic
                 try
                 {
                     var user = entities.Usuarios.Find(data.Correo);
-                    user.Nombre = data.Nombre;
-                    user.Apellido1 = data.Apellido1;
-                    user.Apellido2 = data.Apellido2;
+                    //user.Nombre = data.Nombre;
+                    //user.Apellido1 = data.Apellido1;
+                    //user.Apellido2 = data.Apellido2;
                     user.Telefono = data.Telefono;
-                    user.Carne = data.Carne;
-                    user.Correo = data.Correo;
-                    user.Universidad = data.Universidad;
-                    user.Contraseña = data.Contraseña;
+                    //user.Carne = data.Carne;
+                    //user.Correo = data.Correo;
+                    //user.Universidad = data.Universidad;
+                    //user.Contraseña = data.Contraseña;
                     entities.SaveChanges();
                     return true;
                 }

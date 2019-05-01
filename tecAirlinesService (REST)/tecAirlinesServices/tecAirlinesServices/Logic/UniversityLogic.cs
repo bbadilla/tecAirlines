@@ -119,7 +119,7 @@ namespace tecAirlinesServices.Logic
                 {
                     //entities.Universidads.Add(newUniversity);
                     //entities.SaveChanges();
-                    int entity = entities.Insertar_Universidad(data.Identificador, data.Nombre);
+                    int entity = entities.udsp_ins_universidad(data.Nombre);
                     return true;
                 }
                 catch (Exception e)

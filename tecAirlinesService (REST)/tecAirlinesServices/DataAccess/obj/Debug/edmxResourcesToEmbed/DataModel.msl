@@ -7,6 +7,8 @@
           <ScalarProperty Name="Identificador" ColumnName="Identificador" />
           <ScalarProperty Name="Modelo" ColumnName="Modelo" />
           <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />
+          <ScalarProperty Name="A_Economicos" ColumnName="A_Economicos" />
+          <ScalarProperty Name="A_Ejecutivos" ColumnName="A_Ejecutivos" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -21,24 +23,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Reservas">
-      <EntityTypeMapping TypeName="tecAirlinesModel.Reserva">
-        <MappingFragment StoreEntitySet="Reserva">
-          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-          <ScalarProperty Name="Chequeo" ColumnName="Chequeo" />
-          <ScalarProperty Name="Equipaje" ColumnName="Equipaje" />
-          <ScalarProperty Name="C_Vuelo" ColumnName="C_Vuelo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Tarjetas">
-      <EntityTypeMapping TypeName="tecAirlinesModel.Tarjeta">
-        <MappingFragment StoreEntitySet="Tarjeta">
+    <EntitySetMapping Name="Pagoes">
+      <EntityTypeMapping TypeName="tecAirlinesModel.Pago">
+        <MappingFragment StoreEntitySet="Pago">
           <ScalarProperty Name="Numero" ColumnName="Numero" />
           <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
           <ScalarProperty Name="Expiracion" ColumnName="Expiracion" />
           <ScalarProperty Name="Titular" ColumnName="Titular" />
           <ScalarProperty Name="C_Reserva" ColumnName="C_Reserva" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reservas">
+      <EntityTypeMapping TypeName="tecAirlinesModel.Reserva">
+        <MappingFragment StoreEntitySet="Reserva">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="C_Usuario" ColumnName="C_Usuario" />
+          <ScalarProperty Name="Chequeo" ColumnName="Chequeo" />
+          <ScalarProperty Name="Pago" ColumnName="Pago" />
+          <ScalarProperty Name="Equipaje" ColumnName="Equipaje" />
+          <ScalarProperty Name="C_Vuelo" ColumnName="C_Vuelo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -69,13 +73,14 @@
         <MappingFragment StoreEntitySet="Vuelo">
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
           <ScalarProperty Name="Estado" ColumnName="Estado" />
-          <ScalarProperty Name="Costo" ColumnName="Costo" />
+          <ScalarProperty Name="C_Economico" ColumnName="C_Economico" />
+          <ScalarProperty Name="C_Ejecutivo" ColumnName="C_Ejecutivo" />
           <ScalarProperty Name="F_Salida" ColumnName="F_Salida" />
           <ScalarProperty Name="F_Llegada" ColumnName="F_Llegada" />
+          <ScalarProperty Name="A_Salida" ColumnName="A_Salida" />
+          <ScalarProperty Name="A_Llegada" ColumnName="A_Llegada" />
           <ScalarProperty Name="Millas" ColumnName="Millas" />
           <ScalarProperty Name="ID_Aeronave" ColumnName="ID_Aeronave" />
-          <ScalarProperty Name="A_Economicos" ColumnName="A_Economicos" />
-          <ScalarProperty Name="A_Ejecutivos" ColumnName="A_Ejecutivos" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -114,25 +119,23 @@
     <EntitySetMapping Name="Tiquetes">
       <EntityTypeMapping TypeName="tecAirlinesModel.Tiquete">
         <MappingFragment StoreEntitySet="Tiquete">
+          <ScalarProperty Name="Identificador" ColumnName="Identificador" />
           <ScalarProperty Name="C_Reserva" ColumnName="C_Reserva" />
           <ScalarProperty Name="Categoria" ColumnName="Categoria" />
           <ScalarProperty Name="N_Asiento" ColumnName="N_Asiento" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="Reservaciones" TypeName="tecAirlinesModel.Reservaciones" StoreEntitySet="Reservaciones">
-      <EndProperty Name="Reserva">
-        <ScalarProperty Name="Codigo" ColumnName="C_Reserva" />
-      </EndProperty>
-      <EndProperty Name="Usuario">
-        <ScalarProperty Name="Correo" ColumnName="C_Usuario" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <FunctionImportMapping FunctionImportName="Insertar_Aeronave" FunctionName="tecAirlinesModel.Store.Insertar_Aeronave" />
-    <FunctionImportMapping FunctionImportName="Insertar_Tiquete" FunctionName="tecAirlinesModel.Store.Insertar_Tiquete" />
-    <FunctionImportMapping FunctionImportName="Insertar_Universidad" FunctionName="tecAirlinesModel.Store.Insertar_Universidad" />
-    <FunctionImportMapping FunctionImportName="Insertar_Usuario" FunctionName="tecAirlinesModel.Store.Insertar_Usuario" />
-    <FunctionImportMapping FunctionImportName="sp_ins_escala" FunctionName="tecAirlinesModel.Store.sp_ins_escala" />
-    <FunctionImportMapping FunctionImportName="sp_ins_vuelo" FunctionName="tecAirlinesModel.Store.sp_ins_vuelo" />
+    <FunctionImportMapping FunctionImportName="udsp_ins_escala" FunctionName="tecAirlinesModel.Store.udsp_ins_escala" />
+    <FunctionImportMapping FunctionImportName="udsp_ins_pago" FunctionName="tecAirlinesModel.Store.udsp_ins_pago" />
+    <FunctionImportMapping FunctionImportName="udsp_ins_reserva" FunctionName="tecAirlinesModel.Store.udsp_ins_reserva" />
+    <FunctionImportMapping FunctionImportName="udsp_ins_tiquete" FunctionName="tecAirlinesModel.Store.udsp_ins_tiquete" />
+    <FunctionImportMapping FunctionImportName="udsp_ins_universidad" FunctionName="tecAirlinesModel.Store.udsp_ins_universidad" />
+    <FunctionImportMapping FunctionImportName="udsp_ins_usuario" FunctionName="tecAirlinesModel.Store.udsp_ins_usuario" />
+    <FunctionImportMapping FunctionImportName="udsp_ins_vuelo" FunctionName="tecAirlinesModel.Store.udsp_ins_vuelo" />
+    <FunctionImportMapping FunctionImportName="udsp_up_abrirvuelo" FunctionName="tecAirlinesModel.Store.udsp_up_abrirvuelo" />
+    <FunctionImportMapping FunctionImportName="udsp_up_cerrarvuelo" FunctionName="tecAirlinesModel.Store.udsp_up_cerrarvuelo" />
+    <FunctionImportMapping FunctionImportName="udsp_up_reserva" FunctionName="tecAirlinesModel.Store.udsp_up_reserva" />
+    <FunctionImportMapping FunctionImportName="udsp_up_tiquete" FunctionName="tecAirlinesModel.Store.udsp_up_tiquete" />
   </EntityContainerMapping>
 </Mapping>

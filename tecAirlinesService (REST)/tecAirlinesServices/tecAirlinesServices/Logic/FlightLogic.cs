@@ -35,13 +35,14 @@ namespace tecAirlinesServices.Logic
                             FlightData data = new FlightData();
                             data.Codigo = flightList.ElementAt(i).Codigo;
                             data.Estado = flightList.ElementAt(i).Estado;
-                            data.Costo = flightList.ElementAt(i).Costo;
+                            data.C_Economico = flightList.ElementAt(i).C_Economico;
+                            data.C_Ejecutivo = flightList.ElementAt(i).C_Ejecutivo;
                             data.F_Salida = flightList.ElementAt(i).F_Salida;
                             data.F_Llegada = flightList.ElementAt(i).F_Llegada;
+                            data.A_Salida = flightList.ElementAt(i).A_Salida;
+                            data.A_Llegada = flightList.ElementAt(i).A_Llegada;
                             data.Millas = flightList.ElementAt(i).Millas;
                             data.ID_Aeronave = flightList.ElementAt(i).ID_Aeronave;
-                            data.A_Economicos = flightList.ElementAt(i).A_Economicos;
-                            data.A_Ejecutivos = flightList.ElementAt(i).A_Ejecutivos;
                             dataList.Add(data);
                         }
                         return dataList;
@@ -79,14 +80,14 @@ namespace tecAirlinesServices.Logic
                     var vuelox = entities.Vueloes.Find(id);
                     flight.Codigo = vuelox.Codigo;
                     flight.Estado = vuelox.Estado;
-                    flight.Costo = vuelox.Costo;
+                    flight.C_Ejecutivo = vuelox.C_Ejecutivo;
+                    flight.C_Economico = vuelox.C_Economico;
                     flight.F_Salida = vuelox.F_Salida;
                     flight.F_Llegada = vuelox.F_Llegada;
+                    flight.A_Salida = vuelox.A_Salida;
+                    flight.A_Llegada = vuelox.A_Llegada;
                     flight.Millas = vuelox.Millas;
                     flight.ID_Aeronave = vuelox.ID_Aeronave;
-                    flight.A_Economicos = vuelox.A_Economicos;
-                    flight.A_Ejecutivos = vuelox.A_Ejecutivos;
-
                     return flight;
 
                 }
@@ -137,7 +138,8 @@ namespace tecAirlinesServices.Logic
                 {
                     //entities.Vueloes.Add(newFlight);
                     //entities.SaveChanges();
-                    int entity = entities.sp_ins_vuelo(data.Codigo, data.Costo, data.F_Salida, data.F_Llegada, data.Millas, data.ID_Aeronave, data.A_Economicos, data.A_Ejecutivos);
+                    int entity = entities.udsp_ins_vuelo( data.Codigo, data.C_Ejecutivo, data.C_Economico, data.F_Salida, data.F_Llegada, data.A_Salida, data.A_Llegada, data.Millas, data.ID_Aeronave);
+
                     return true;
                 }
                 catch (Exception e)
@@ -175,24 +177,16 @@ namespace tecAirlinesServices.Logic
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public bool UpdateFlight(FlightData data)
+        public bool CloseFlight(FlightData data)
         {
             using (tecAirlinesEntities entities = new tecAirlinesEntities())
             {
                 try
                 {
-                    var flight = entities.Vueloes.Find(data.Codigo);
-                    
-                    flight.Codigo = data.Codigo;
-                    flight.Estado = data.Estado;
-                    flight.Costo = data.Costo;
-                    flight.F_Salida = data.F_Salida;
-                    flight.F_Llegada = data.F_Llegada;
-                    flight.Millas = data.Millas;
-                    flight.ID_Aeronave = data.ID_Aeronave;
-                    flight.A_Economicos = data.A_Economicos;
-                    flight.A_Ejecutivos = data.A_Ejecutivos;
+                    int entity = entities.udsp_up_cerrarvuelo(data.Codigo);
                     return true;
+
+               
                 }
                 catch (Exception e)
                 {
@@ -201,6 +195,28 @@ namespace tecAirlinesServices.Logic
             }
         }
 
+        /// <summary>
+        /// Actualizar un vuelo
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public bool OpenFlight(FlightData data)
+        {
+            using (tecAirlinesEntities entities = new tecAirlinesEntities())
+            {
+                try
+                {
+                    int entity = entities.udsp_up_abrirvuelo(data.Codigo);
+                    return true;
+
+
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+        }
 
     }
 }

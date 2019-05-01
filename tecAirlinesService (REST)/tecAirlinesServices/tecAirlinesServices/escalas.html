@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Escalas</title>
+    <meta name="description" content="Travel">
+    <link href="https://fonts.googleapis.com/css?family=Hind:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Secular+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:900" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="css/crear.css" rel="stylesheet">
+</head>
+<script src="Scripts/jquery-3.3.1.js"></script>
+<script>
+
+    function send() {
+        var person = {
+            C_Vuelo: $("#C_Vuelo").val(),
+            A_Salida: $("#A_Salida").val(),
+            A_Llegada: $("#A_Llegada").val(),
+            F_Salida: $("#F_Salida").val(),
+            F_Llegada: $("#F_Llegada").val()
+
+        }
+
+        $('#target').html('sending..');
+
+        $.ajax({
+            url: '/api/scale/add/',
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('#target').html(data.msg);
+            },
+            data: JSON.stringify(person)
+        });
+    }
+
+
+</script>
+<body>
+    <header></header>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+
+
+    <img alt="plane" class="plane" src="image/plane.png">
+
+
+    <div class="right">
+        <h1 class="book">Busca </h1>
+        <h1 class="travel">& Viaja</h1>
+        <h4> Con aerolineas TEC, viaja donde quieras</h4>
+        <form id="carros" class="reservation">
+            <fieldset>
+                <label> CODIGO</label>
+                <div>
+                    <input type="text" maxlength="4" class="c" id="C_Vuelo" name="code" size="20" value="" placeholder="1234" required />
+                </div>
+                <label> SALIDA</label>
+                <div>
+                    <input type="text" class="c" id="A_Salida" name="salida" size="20" value="" placeholder="Kabul, Afganistán" required />
+                </div>
+
+                <label> DESTINO</label>
+                <div>
+                    <input type="text" class="c" id="A_Llegada" name="destino" size="20" value="" placeholder="Bagdad, Irak" required />
+                </div>
+                <label> FECHA DE SALIDA</label>
+                <div>
+                    <input type="text" class="c" id="F_Salida" name="fsalida" size="20" value="" placeholder="2019-08-17 6:00" required />
+                </div>
+                <label> FECHA DE LLEGADA</label>
+                <div>
+                    <input type="text" class="c" id="F_Llegada" name="fllegada" size="20" value="" placeholder="2019-08-17 15:00" required />
+                </div>
+                <div class="button">
+                    <input type="button" class="btn" value="CREAR ESCALA" onclick="send()" />
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+
+</body>
+</html>

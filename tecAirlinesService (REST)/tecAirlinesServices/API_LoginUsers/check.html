@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Chequeo</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+
+</head>
+<script src="Scripts/jquery-3.3.1.js"></script>>
+<script>
+
+    $(document).ready(function () {
+        $("#Save").click(function () {
+            var data = {
+                Codigo: $("#C_Reserva").val(),
+                Equipaje: $("#C_Maletas").val()
+
+            }
+
+            var json = JSON.stringify(data)
+
+            $.ajax({
+                url: '/api/reservation/update/',
+                type: 'PUT',
+                contentType: "application/json; charset=utf-8",
+                data: json,
+                success: function (results) {
+
+                }
+            })
+        });
+    });
+
+</script>
+
+<body>
+
+    <h1 class="">Check-in</h1>
+
+    <body>
+
+        <form action="">
+            <input id="C_Reserva" name="C_Reserva" type="number" placeholder="Codigo de la reserva">
+            <input id="C_Maletas" name="C_Maletas" type="number" placeholder="Cantidad de maletas">
+            <input type="button" id="Save" value="Listo">
+        </form>
+
+    </body>
+</html>

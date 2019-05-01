@@ -4,9 +4,11 @@
     <Key>
       <PropertyRef Name="Identificador" />
     </Key>
-    <Property Name="Identificador" Type="int" Nullable="false" />
-    <Property Name="Modelo" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Identificador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Modelo" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="Capacidad" Type="int" Nullable="false" />
+    <Property Name="A_Economicos" Type="int" Nullable="false" />
+    <Property Name="A_Ejecutivos" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="airports">
     <Key>
@@ -28,11 +30,21 @@ advertencia 6002: La tabla o vista 'tecAirlines.dbo.Escala' no tiene definida ni
       <PropertyRef Name="F_Salida" />
       <PropertyRef Name="F_Llegada" />
     </Key>
-    <Property Name="C_Vuelo" Type="char" MaxLength="7" Nullable="false" />
+    <Property Name="C_Vuelo" Type="varchar" MaxLength="4" Nullable="false" />
     <Property Name="A_Salida" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="A_Llegada" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="F_Salida" Type="datetime" Nullable="false" />
     <Property Name="F_Llegada" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pago">
+    <Key>
+      <PropertyRef Name="Numero" />
+    </Key>
+    <Property Name="Numero" Type="int" Nullable="false" />
+    <Property Name="Contraseña" Type="int" Nullable="false" />
+    <Property Name="Expiracion" Type="date" Nullable="false" />
+    <Property Name="Titular" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="C_Reserva" Type="int" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'tecAirlines.dbo.Programa' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -57,7 +69,7 @@ advertencia 6002: La tabla o vista 'tecAirlines.dbo.Promocion' no tiene definida
       <PropertyRef Name="Imagen" />
     </Key>
     <Property Name="C_Usuario" Type="varchar" MaxLength="35" Nullable="false" />
-    <Property Name="C_Vuelo" Type="char" MaxLength="7" Nullable="false" />
+    <Property Name="C_Vuelo" Type="varchar" MaxLength="4" Nullable="false" />
     <Property Name="F_Inicio" Type="date" Nullable="false" />
     <Property Name="F_Fin" Type="date" Nullable="false" />
     <Property Name="Porcentaje" Type="int" Nullable="false" />
@@ -67,48 +79,31 @@ advertencia 6002: La tabla o vista 'tecAirlines.dbo.Promocion' no tiene definida
     <Key>
       <PropertyRef Name="Codigo" />
     </Key>
-    <Property Name="Codigo" Type="int" Nullable="false" />
-    <Property Name="Chequeo" Type="bit" Nullable="false" />
-    <Property Name="Equipaje" Type="int" Nullable="false" />
-    <Property Name="C_Vuelo" Type="char" MaxLength="7" Nullable="false" />
-  </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'tecAirlines.dbo.Reservaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-  <EntityType Name="Reservaciones">
-    <Key>
-      <PropertyRef Name="C_Reserva" />
-      <PropertyRef Name="C_Usuario" />
-    </Key>
-    <Property Name="C_Reserva" Type="int" Nullable="false" />
+    <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="C_Usuario" Type="varchar" MaxLength="35" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Tarjeta">
-    <Key>
-      <PropertyRef Name="Numero" />
-    </Key>
-    <Property Name="Numero" Type="int" Nullable="false" />
-    <Property Name="Contraseña" Type="int" Nullable="false" />
-    <Property Name="Expiracion" Type="date" Nullable="false" />
-    <Property Name="Titular" Type="varchar" MaxLength="40" Nullable="false" />
-    <Property Name="C_Reserva" Type="int" Nullable="false" />
+    <Property Name="Chequeo" Type="bit" Nullable="false" />
+    <Property Name="Pago" Type="bit" Nullable="false" />
+    <Property Name="Equipaje" Type="int" Nullable="false" />
+    <Property Name="C_Vuelo" Type="varchar" MaxLength="4" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'tecAirlines.dbo.Tiquete' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="Tiquete">
     <Key>
+      <PropertyRef Name="Identificador" />
       <PropertyRef Name="C_Reserva" />
       <PropertyRef Name="Categoria" />
-      <PropertyRef Name="N_Asiento" />
     </Key>
+    <Property Name="Identificador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="C_Reserva" Type="int" Nullable="false" />
     <Property Name="Categoria" Type="int" Nullable="false" />
-    <Property Name="N_Asiento" Type="int" Nullable="false" />
+    <Property Name="N_Asiento" Type="int" />
   </EntityType>
   <EntityType Name="Universidad">
     <Key>
       <PropertyRef Name="Identificador" />
     </Key>
-    <Property Name="Identificador" Type="int" Nullable="false" />
+    <Property Name="Identificador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="4" Nullable="false" />
   </EntityType>
   <EntityType Name="Usuario">
@@ -128,17 +123,18 @@ advertencia 6002: La tabla o vista 'tecAirlines.dbo.Tiquete' no tiene definida n
     <Key>
       <PropertyRef Name="Codigo" />
     </Key>
-    <Property Name="Codigo" Type="char" MaxLength="7" Nullable="false" />
+    <Property Name="Codigo" Type="varchar" MaxLength="4" Nullable="false" />
     <Property Name="Estado" Type="bit" />
-    <Property Name="Costo" Type="int" Nullable="false" />
+    <Property Name="C_Economico" Type="int" Nullable="false" />
+    <Property Name="C_Ejecutivo" Type="int" Nullable="false" />
     <Property Name="F_Salida" Type="datetime" />
     <Property Name="F_Llegada" Type="datetime" />
+    <Property Name="A_Salida" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="A_Llegada" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="Millas" Type="int" Nullable="false" />
     <Property Name="ID_Aeronave" Type="int" Nullable="false" />
-    <Property Name="A_Economicos" Type="int" Nullable="false" />
-    <Property Name="A_Ejecutivos" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="FK__Escala__A_Llegad__4E88ABD4">
+  <Association Name="FK__Escala__A_Llegad__4F7CD00D">
     <End Role="airports" Type="Self.airports" Multiplicity="1" />
     <End Role="Escala" Type="Self.Escala" Multiplicity="*" />
     <ReferentialConstraint>
@@ -150,7 +146,7 @@ advertencia 6002: La tabla o vista 'tecAirlines.dbo.Tiquete' no tiene definida n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Escala__A_Salida__4D94879B">
+  <Association Name="FK__Escala__A_Salida__4E88ABD4">
     <End Role="airports" Type="Self.airports" Multiplicity="1" />
     <End Role="Escala" Type="Self.Escala" Multiplicity="*" />
     <ReferentialConstraint>
@@ -162,7 +158,7 @@ advertencia 6002: La tabla o vista 'tecAirlines.dbo.Tiquete' no tiene definida n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Escala__C_Vuelo__4CA06362">
+  <Association Name="FK__Escala__C_Vuelo__4D94879B">
     <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="1" />
     <End Role="Escala" Type="Self.Escala" Multiplicity="*" />
     <ReferentialConstraint>
@@ -174,7 +170,19 @@ advertencia 6002: La tabla o vista 'tecAirlines.dbo.Tiquete' no tiene definida n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Programa__C_Usua__440B1D61">
+  <Association Name="FK__Pago__C_Reserva__5812160E">
+    <End Role="Reserva" Type="Self.Reserva" Multiplicity="1" />
+    <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reserva">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Pago">
+        <PropertyRef Name="C_Reserva" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Programa__C_Usua__4316F928">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
     <End Role="Programa" Type="Self.Programa" Multiplicity="*" />
     <ReferentialConstraint>
@@ -186,7 +194,7 @@ advertencia 6002: La tabla o vista 'tecAirlines.dbo.Tiquete' no tiene definida n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Programa__ID_Uni__44FF419A">
+  <Association Name="FK__Programa__ID_Uni__440B1D61">
     <End Role="Universidad" Type="Self.Universidad" Multiplicity="1" />
     <End Role="Programa" Type="Self.Programa" Multiplicity="*" />
     <ReferentialConstraint>
@@ -198,7 +206,7 @@ advertencia 6002: La tabla o vista 'tecAirlines.dbo.Tiquete' no tiene definida n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Promocion__C_Usu__49C3F6B7">
+  <Association Name="FK__Promocion__C_Usu__4BAC3F29">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
     <End Role="Promocion" Type="Self.Promocion" Multiplicity="*" />
     <ReferentialConstraint>
@@ -210,7 +218,7 @@ advertencia 6002: La tabla o vista 'tecAirlines.dbo.Tiquete' no tiene definida n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Promocion__C_Vue__4AB81AF0">
+  <Association Name="FK__Promocion__C_Vue__4CA06362">
     <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="1" />
     <End Role="Promocion" Type="Self.Promocion" Multiplicity="*" />
     <ReferentialConstraint>
@@ -222,7 +230,19 @@ advertencia 6002: La tabla o vista 'tecAirlines.dbo.Tiquete' no tiene definida n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Reserva__C_Vuelo__5070F446">
+  <Association Name="FK__Reserva__C_Usuar__5535A963">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Correo" />
+      </Principal>
+      <Dependent Role="Reserva">
+        <PropertyRef Name="C_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reserva__C_Vuelo__5441852A">
     <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="1" />
     <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
     <ReferentialConstraint>
@@ -234,43 +254,7 @@ advertencia 6002: La tabla o vista 'tecAirlines.dbo.Tiquete' no tiene definida n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Reservaci__C_Res__52593CB8">
-    <End Role="Reserva" Type="Self.Reserva" Multiplicity="1" />
-    <End Role="Reservaciones" Type="Self.Reservaciones" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Reserva">
-        <PropertyRef Name="Codigo" />
-      </Principal>
-      <Dependent Role="Reservaciones">
-        <PropertyRef Name="C_Reserva" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Reservaci__C_Usu__534D60F1">
-    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-    <End Role="Reservaciones" Type="Self.Reservaciones" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuario">
-        <PropertyRef Name="Correo" />
-      </Principal>
-      <Dependent Role="Reservaciones">
-        <PropertyRef Name="C_Usuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Tarjeta__C_Reser__5535A963">
-    <End Role="Reserva" Type="Self.Reserva" Multiplicity="1" />
-    <End Role="Tarjeta" Type="Self.Tarjeta" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Reserva">
-        <PropertyRef Name="Codigo" />
-      </Principal>
-      <Dependent Role="Tarjeta">
-        <PropertyRef Name="C_Reserva" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Tiquete__C_Reser__5165187F">
+  <Association Name="FK__Tiquete__C_Reser__5629CD9C">
     <End Role="Reserva" Type="Self.Reserva" Multiplicity="1" />
     <End Role="Tiquete" Type="Self.Tiquete" Multiplicity="*" />
     <ReferentialConstraint>
@@ -279,6 +263,30 @@ advertencia 6002: La tabla o vista 'tecAirlines.dbo.Tiquete' no tiene definida n
       </Principal>
       <Dependent Role="Tiquete">
         <PropertyRef Name="C_Reserva" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vuelo__A_Llegada__4AB81AF0">
+    <End Role="airports" Type="Self.airports" Multiplicity="1" />
+    <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="airports">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Vuelo">
+        <PropertyRef Name="A_Llegada" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vuelo__A_Salida__49C3F6B7">
+    <End Role="airports" Type="Self.airports" Multiplicity="1" />
+    <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="airports">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Vuelo">
+        <PropertyRef Name="A_Salida" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -294,13 +302,35 @@ advertencia 6002: La tabla o vista 'tecAirlines.dbo.Tiquete' no tiene definida n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="Insertar_Aeronave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="Insertar_Tiquete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="Insertar_Universidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Identificador" Type="int" Mode="In" />
+  <Function Name="udsp_ins_escala" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="C_Vuelo" Type="varchar" Mode="In" />
+    <Parameter Name="A_Salida" Type="varchar" Mode="In" />
+    <Parameter Name="A_Llegada" Type="varchar" Mode="In" />
+    <Parameter Name="F_Salida" Type="datetime" Mode="In" />
+    <Parameter Name="F_Llegada" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="udsp_ins_pago" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Numero" Type="int" Mode="In" />
+    <Parameter Name="Contraseña" Type="int" Mode="In" />
+    <Parameter Name="Expiracion" Type="date" Mode="In" />
+    <Parameter Name="Titular" Type="varchar" Mode="In" />
+    <Parameter Name="C_Reserva" Type="int" Mode="In" />
+  </Function>
+  <Function Name="udsp_ins_reserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="C_Usuario" Type="varchar" Mode="In" />
+    <Parameter Name="C_Vuelo" Type="varchar" Mode="In" />
+    <Parameter Name="C_Economico" Type="int" Mode="In" />
+    <Parameter Name="C_Ejecutivo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="udsp_ins_tiquete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Iteraciones" Type="int" Mode="In" />
+    <Parameter Name="C_Reserva" Type="int" Mode="In" />
+    <Parameter Name="Categoria" Type="int" Mode="In" />
+  </Function>
+  <Function Name="udsp_ins_universidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Nombre" Type="varchar" Mode="In" />
   </Function>
-  <Function Name="Insertar_Usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="udsp_ins_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Nombre" Type="varchar" Mode="In" />
     <Parameter Name="Apellido1" Type="varchar" Mode="In" />
     <Parameter Name="Apellido2" Type="varchar" Mode="In" />
@@ -310,28 +340,36 @@ advertencia 6002: La tabla o vista 'tecAirlines.dbo.Tiquete' no tiene definida n
     <Parameter Name="Correo" Type="varchar" Mode="In" />
     <Parameter Name="Contraseña" Type="varchar" Mode="In" />
   </Function>
-  <Function Name="sp_ins_escala" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="C_Vuelo" Type="char" Mode="In" />
+  <Function Name="udsp_ins_vuelo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Codigo" Type="varchar" Mode="In" />
+    <Parameter Name="C_Economico" Type="int" Mode="In" />
+    <Parameter Name="C_Ejecutivo" Type="int" Mode="In" />
+    <Parameter Name="F_Salida" Type="datetime" Mode="In" />
+    <Parameter Name="F_Llegada" Type="datetime" Mode="In" />
     <Parameter Name="A_Salida" Type="varchar" Mode="In" />
     <Parameter Name="A_Llegada" Type="varchar" Mode="In" />
-    <Parameter Name="F_Salida" Type="time" Mode="In" />
-    <Parameter Name="F_Llegada" Type="time" Mode="In" />
-  </Function>
-  <Function Name="sp_ins_vuelo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Codigo" Type="char" Mode="In" />
-    <Parameter Name="Costo" Type="int" Mode="In" />
-    <Parameter Name="F_Salida" Type="time" Mode="In" />
-    <Parameter Name="F_Llegada" Type="time" Mode="In" />
     <Parameter Name="Millas" Type="int" Mode="In" />
     <Parameter Name="ID_Aeronave" Type="int" Mode="In" />
-    <Parameter Name="A_Economicos" Type="int" Mode="In" />
-    <Parameter Name="A_Ejecutivos" Type="int" Mode="In" />
+  </Function>
+  <Function Name="udsp_up_abrirvuelo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="C_Vuelo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="udsp_up_cerrarvuelo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="C_Vuelo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="udsp_up_reserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="C_Reserva" Type="int" Mode="In" />
+    <Parameter Name="C_Maletas" Type="int" Mode="In" />
+  </Function>
+  <Function Name="udsp_up_tiquete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Identificador" Type="int" Mode="In" />
+    <Parameter Name="N_Asiento" Type="int" Mode="In" />
   </Function>
   <EntityContainer Name="tecAirlinesModelStoreContainer">
     <EntitySet Name="Aeronave" EntityType="Self.Aeronave" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="airports" EntityType="Self.airports" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pago" EntityType="Self.Pago" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reserva" EntityType="Self.Reserva" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Tarjeta" EntityType="Self.Tarjeta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Universidad" EntityType="Self.Universidad" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Vuelo" EntityType="Self.Vuelo" Schema="dbo" store:Type="Tables" />
@@ -361,66 +399,65 @@ advertencia 6002: La tabla o vista 'tecAirlines.dbo.Tiquete' no tiene definida n
     [Promocion].[Imagen] AS [Imagen]
     FROM [dbo].[Promocion] AS [Promocion]</DefiningQuery>
     </EntitySet>
-    <EntitySet Name="Reservaciones" EntityType="Self.Reservaciones" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Reservaciones].[C_Reserva] AS [C_Reserva], 
-    [Reservaciones].[C_Usuario] AS [C_Usuario]
-    FROM [dbo].[Reservaciones] AS [Reservaciones]</DefiningQuery>
-    </EntitySet>
     <EntitySet Name="Tiquete" EntityType="Self.Tiquete" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
+    [Tiquete].[Identificador] AS [Identificador], 
     [Tiquete].[C_Reserva] AS [C_Reserva], 
     [Tiquete].[Categoria] AS [Categoria], 
     [Tiquete].[N_Asiento] AS [N_Asiento]
     FROM [dbo].[Tiquete] AS [Tiquete]</DefiningQuery>
     </EntitySet>
-    <AssociationSet Name="FK__Escala__A_Llegad__4E88ABD4" Association="Self.FK__Escala__A_Llegad__4E88ABD4">
+    <AssociationSet Name="FK__Escala__A_Llegad__4F7CD00D" Association="Self.FK__Escala__A_Llegad__4F7CD00D">
       <End Role="airports" EntitySet="airports" />
       <End Role="Escala" EntitySet="Escala" />
     </AssociationSet>
-    <AssociationSet Name="FK__Escala__A_Salida__4D94879B" Association="Self.FK__Escala__A_Salida__4D94879B">
+    <AssociationSet Name="FK__Escala__A_Salida__4E88ABD4" Association="Self.FK__Escala__A_Salida__4E88ABD4">
       <End Role="airports" EntitySet="airports" />
       <End Role="Escala" EntitySet="Escala" />
     </AssociationSet>
-    <AssociationSet Name="FK__Escala__C_Vuelo__4CA06362" Association="Self.FK__Escala__C_Vuelo__4CA06362">
+    <AssociationSet Name="FK__Escala__C_Vuelo__4D94879B" Association="Self.FK__Escala__C_Vuelo__4D94879B">
       <End Role="Vuelo" EntitySet="Vuelo" />
       <End Role="Escala" EntitySet="Escala" />
     </AssociationSet>
-    <AssociationSet Name="FK__Programa__C_Usua__440B1D61" Association="Self.FK__Programa__C_Usua__440B1D61">
+    <AssociationSet Name="FK__Pago__C_Reserva__5812160E" Association="Self.FK__Pago__C_Reserva__5812160E">
+      <End Role="Reserva" EntitySet="Reserva" />
+      <End Role="Pago" EntitySet="Pago" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Programa__C_Usua__4316F928" Association="Self.FK__Programa__C_Usua__4316F928">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Programa" EntitySet="Programa" />
     </AssociationSet>
-    <AssociationSet Name="FK__Programa__ID_Uni__44FF419A" Association="Self.FK__Programa__ID_Uni__44FF419A">
+    <AssociationSet Name="FK__Programa__ID_Uni__440B1D61" Association="Self.FK__Programa__ID_Uni__440B1D61">
       <End Role="Universidad" EntitySet="Universidad" />
       <End Role="Programa" EntitySet="Programa" />
     </AssociationSet>
-    <AssociationSet Name="FK__Promocion__C_Usu__49C3F6B7" Association="Self.FK__Promocion__C_Usu__49C3F6B7">
+    <AssociationSet Name="FK__Promocion__C_Usu__4BAC3F29" Association="Self.FK__Promocion__C_Usu__4BAC3F29">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Promocion" EntitySet="Promocion" />
     </AssociationSet>
-    <AssociationSet Name="FK__Promocion__C_Vue__4AB81AF0" Association="Self.FK__Promocion__C_Vue__4AB81AF0">
+    <AssociationSet Name="FK__Promocion__C_Vue__4CA06362" Association="Self.FK__Promocion__C_Vue__4CA06362">
       <End Role="Vuelo" EntitySet="Vuelo" />
       <End Role="Promocion" EntitySet="Promocion" />
     </AssociationSet>
-    <AssociationSet Name="FK__Reserva__C_Vuelo__5070F446" Association="Self.FK__Reserva__C_Vuelo__5070F446">
+    <AssociationSet Name="FK__Reserva__C_Usuar__5535A963" Association="Self.FK__Reserva__C_Usuar__5535A963">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Reserva" EntitySet="Reserva" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reserva__C_Vuelo__5441852A" Association="Self.FK__Reserva__C_Vuelo__5441852A">
       <End Role="Vuelo" EntitySet="Vuelo" />
       <End Role="Reserva" EntitySet="Reserva" />
     </AssociationSet>
-    <AssociationSet Name="FK__Reservaci__C_Res__52593CB8" Association="Self.FK__Reservaci__C_Res__52593CB8">
-      <End Role="Reserva" EntitySet="Reserva" />
-      <End Role="Reservaciones" EntitySet="Reservaciones" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Reservaci__C_Usu__534D60F1" Association="Self.FK__Reservaci__C_Usu__534D60F1">
-      <End Role="Usuario" EntitySet="Usuario" />
-      <End Role="Reservaciones" EntitySet="Reservaciones" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Tarjeta__C_Reser__5535A963" Association="Self.FK__Tarjeta__C_Reser__5535A963">
-      <End Role="Reserva" EntitySet="Reserva" />
-      <End Role="Tarjeta" EntitySet="Tarjeta" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Tiquete__C_Reser__5165187F" Association="Self.FK__Tiquete__C_Reser__5165187F">
+    <AssociationSet Name="FK__Tiquete__C_Reser__5629CD9C" Association="Self.FK__Tiquete__C_Reser__5629CD9C">
       <End Role="Reserva" EntitySet="Reserva" />
       <End Role="Tiquete" EntitySet="Tiquete" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vuelo__A_Llegada__4AB81AF0" Association="Self.FK__Vuelo__A_Llegada__4AB81AF0">
+      <End Role="airports" EntitySet="airports" />
+      <End Role="Vuelo" EntitySet="Vuelo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vuelo__A_Salida__49C3F6B7" Association="Self.FK__Vuelo__A_Salida__49C3F6B7">
+      <End Role="airports" EntitySet="airports" />
+      <End Role="Vuelo" EntitySet="Vuelo" />
     </AssociationSet>
     <AssociationSet Name="FK__Vuelo__ID_Aerona__48CFD27E" Association="Self.FK__Vuelo__ID_Aerona__48CFD27E">
       <End Role="Aeronave" EntitySet="Aeronave" />

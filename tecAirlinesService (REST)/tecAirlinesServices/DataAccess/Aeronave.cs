@@ -23,6 +23,8 @@ namespace DataAccess
         public int Identificador { get; set; }
         public string Modelo { get; set; }
         public int Capacidad { get; set; }
+        public int A_Economicos { get; set; }
+        public int A_Ejecutivos { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Vuelo> Vueloes { get; set; }

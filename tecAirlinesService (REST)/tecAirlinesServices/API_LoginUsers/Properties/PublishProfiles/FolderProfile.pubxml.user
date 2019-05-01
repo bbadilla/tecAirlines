@@ -9,6 +9,18 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
     <_PublishTargetUrl>C:\Users\Bryan\Desktop\ApiUser</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include=".gitignore">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include=".travis.yml">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="abrir.html">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="aeropuertos.html">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
     <File Include="Areas/HelpPage/HelpPage.css">
       <publishTime>04/29/2019 18:50:45</publishTime>
     </File>
@@ -73,25 +85,25 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>04/29/2019 18:50:14</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
-      <publishTime>09/10/2013 16:29:20</publishTime>
+      <publishTime>10/09/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.pdb">
-      <publishTime>09/10/2013 16:29:20</publishTime>
+      <publishTime>10/09/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/API_LoginUsers.dll">
-      <publishTime>04/30/2019 13:14:04</publishTime>
+      <publishTime>05/03/2019 16:36:24</publishTime>
     </File>
     <File Include="bin/API_LoginUsers.pdb">
-      <publishTime>04/30/2019 13:14:04</publishTime>
+      <publishTime>05/03/2019 16:36:24</publishTime>
     </File>
     <File Include="bin/DataAccess.dll">
-      <publishTime>04/30/2019 13:14:02</publishTime>
+      <publishTime>05/03/2019 16:36:21</publishTime>
     </File>
     <File Include="bin/DataAccess.dll.config">
-      <publishTime>04/30/2019 11:50:14</publishTime>
+      <publishTime>05/02/2019 09:57:48</publishTime>
     </File>
     <File Include="bin/DataAccess.pdb">
-      <publishTime>04/30/2019 13:14:02</publishTime>
+      <publishTime>05/03/2019 16:36:21</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/23/2017 13:15:18</publishTime>
@@ -103,31 +115,31 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>11/28/2018 13:00:46</publishTime>
     </File>
     <File Include="bin/es/System.Web.Helpers.resources.dll">
-      <publishTime>02/01/2018 12:21:06</publishTime>
+      <publishTime>01/02/2018 12:21:06</publishTime>
     </File>
     <File Include="bin/es/System.Web.Http.resources.dll">
       <publishTime>11/28/2018 13:01:14</publishTime>
     </File>
     <File Include="bin/es/System.Web.Http.WebHost.resources.dll">
-      <publishTime>02/01/2018 12:19:34</publishTime>
+      <publishTime>01/02/2018 12:19:34</publishTime>
     </File>
     <File Include="bin/es/System.Web.Mvc.resources.dll">
-      <publishTime>02/01/2018 12:16:42</publishTime>
+      <publishTime>01/02/2018 12:16:42</publishTime>
     </File>
     <File Include="bin/es/System.Web.Optimization.resources.dll">
-      <publishTime>02/11/2014 15:28:40</publishTime>
+      <publishTime>11/02/2014 15:28:40</publishTime>
     </File>
     <File Include="bin/es/System.Web.Razor.resources.dll">
-      <publishTime>02/01/2018 12:17:04</publishTime>
+      <publishTime>01/02/2018 12:17:04</publishTime>
     </File>
     <File Include="bin/es/System.Web.WebPages.Deployment.resources.dll">
-      <publishTime>02/01/2018 12:21:06</publishTime>
+      <publishTime>01/02/2018 12:21:06</publishTime>
     </File>
     <File Include="bin/es/System.Web.WebPages.Razor.resources.dll">
-      <publishTime>02/01/2018 12:21:06</publishTime>
+      <publishTime>01/02/2018 12:21:06</publishTime>
     </File>
     <File Include="bin/es/System.Web.WebPages.resources.dll">
-      <publishTime>02/01/2018 12:21:06</publishTime>
+      <publishTime>01/02/2018 12:21:06</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.TelemetryCorrelation.dll">
       <publishTime>06/28/2017 15:05:26</publishTime>
@@ -289,37 +301,52 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>11/28/2018 12:58:44</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
-      <publishTime>02/01/2018 12:20:56</publishTime>
+      <publishTime>01/02/2018 12:20:56</publishTime>
     </File>
     <File Include="bin/System.Web.Http.Cors.dll">
       <publishTime>11/28/2018 13:01:26</publishTime>
     </File>
     <File Include="bin/System.Web.Http.dll">
-      <publishTime>11/28/2018 13:01:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/System.Web.Http.WebHost.dll">
-      <publishTime>02/01/2018 12:19:26</publishTime>
+      <publishTime>01/02/2018 12:19:26</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>02/01/2018 12:16:32</publishTime>
+      <publishTime>01/02/2018 12:16:32</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
-      <publishTime>02/11/2014 15:26:04</publishTime>
+      <publishTime>11/02/2014 15:26:04</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>02/01/2018 12:16:56</publishTime>
+      <publishTime>01/02/2018 12:16:56</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
-      <publishTime>02/01/2018 12:20:56</publishTime>
+      <publishTime>01/02/2018 12:20:56</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
-      <publishTime>02/01/2018 12:20:56</publishTime>
+      <publishTime>01/02/2018 12:20:56</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
-      <publishTime>02/01/2018 12:20:56</publishTime>
+      <publishTime>01/02/2018 12:20:56</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>01/23/2014 13:57:34</publishTime>
+    </File>
+    <File Include="buscar - copia.html">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="buscar.html">
+      <publishTime>05/03/2019 13:44:21</publishTime>
+    </File>
+    <File Include="busquedaV.html">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="check.html">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="cierre.html">
+      <publishTime>05/02/2019 11:29:07</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.css">
       <publishTime>04/29/2019 18:50:27</publishTime>
@@ -348,8 +375,53 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
     <File Include="Content/Site.css">
       <publishTime>04/29/2019 18:50:14</publishTime>
     </File>
+    <File Include="css/abrir.css">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="css/buscar.css">
+      <publishTime>05/03/2019 13:38:48</publishTime>
+    </File>
+    <File Include="css/busqueda.css">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="css/mainBack.css">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="css/pago.css">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="css/promos.css">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="css/reserva.css">
+      <publishTime>05/03/2019 13:39:40</publishTime>
+    </File>
+    <File Include="css/simple-sidebar.css">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="css/style.css">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="css/styleInicio.css">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
     <File Include="favicon.ico">
       <publishTime>04/29/2019 18:50:14</publishTime>
+    </File>
+    <File Include="font/fontello.eot">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="font/fontello.svg">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="font/fontello.ttf">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="font/fontello.woff">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="font/fontello.woff2">
+      <publishTime>05/02/2019 11:28:55</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
       <publishTime>04/29/2019 18:50:27</publishTime>
@@ -366,38 +438,236 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
     <File Include="fonts/glyphicons-halflings-regular.woff2">
       <publishTime>04/29/2019 18:50:27</publishTime>
     </File>
+    <File Include="Fourier.html">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="getEspecifico.html">
+      <publishTime>05/02/2019 11:07:44</publishTime>
+    </File>
     <File Include="Global.asax">
       <publishTime>04/29/2019 18:50:14</publishTime>
+    </File>
+    <File Include="gulpfile.js">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="icon/config.json">
+      <publishTime>05/02/2019 11:28:56</publishTime>
+    </File>
+    <File Include="icon/css/animation.css">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="icon/css/fontello-codes.css">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="icon/css/fontello-embedded.css">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="icon/css/fontello-ie7-codes.css">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="icon/css/fontello-ie7.css">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="icon/css/fontello.css">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="icon/demo.html">
+      <publishTime>05/02/2019 11:28:56</publishTime>
+    </File>
+    <File Include="icon/font/fontello.eot">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="icon/font/fontello.svg">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="icon/font/fontello.ttf">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="icon/font/fontello.woff">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="icon/font/fontello.woff2">
+      <publishTime>05/02/2019 11:28:56</publishTime>
+    </File>
+    <File Include="icon/LICENSE.txt">
+      <publishTime>05/02/2019 11:28:56</publishTime>
+    </File>
+    <File Include="icon/README.txt">
+      <publishTime>05/02/2019 11:28:56</publishTime>
+    </File>
+    <File Include="image/background.jpg">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="image/c.jpg">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="image/japon.jpg">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="image/logo_magtimus.png">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="image/plane.png">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="image/portada.jpg">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="image/texas.jpg">
+      <publishTime>05/02/2019 11:28:55</publishTime>
+    </File>
+    <File Include="index.html">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="indexA.html">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="inicio.html">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="js/abrir.js">
+      <publishTime>05/02/2019 11:28:56</publishTime>
+    </File>
+    <File Include="js/buscar.js">
+      <publishTime>05/02/2019 11:28:56</publishTime>
+    </File>
+    <File Include="js/index.js">
+      <publishTime>05/02/2019 11:28:56</publishTime>
+    </File>
+    <File Include="js/log.js">
+      <publishTime>05/02/2019 11:28:56</publishTime>
+    </File>
+    <File Include="js/pago.js">
+      <publishTime>05/02/2019 11:28:56</publishTime>
+    </File>
+    <File Include="js/promos.js">
+      <publishTime>05/02/2019 11:28:56</publishTime>
+    </File>
+    <File Include="js/reserva.js">
+      <publishTime>05/02/2019 11:28:56</publishTime>
+    </File>
+    <File Include="js/sing.js">
+      <publishTime>05/02/2019 11:28:56</publishTime>
+    </File>
+    <File Include="LICENSE">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="log.html">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="package-lock.json">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="package.json">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="pago.html">
+      <publishTime>05/02/2019 11:29:07</publishTime>
     </File>
     <File Include="POST.html">
       <publishTime>04/30/2019 11:11:51</publishTime>
     </File>
+    <File Include="promos.html">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="pruebass.html">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="README.md">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="reserva.html">
+      <publishTime>05/02/2019 12:09:41</publishTime>
+    </File>
+    <File Include="result.html">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
     <File Include="Scripts/bootstrap.js">
-      <publishTime>04/29/2019 18:50:27</publishTime>
+      <publishTime>05/02/2019 11:29:03</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
-      <publishTime>04/29/2019 18:50:26</publishTime>
+      <publishTime>05/02/2019 11:29:04</publishTime>
     </File>
     <File Include="Scripts/jquery-3.3.1.js">
-      <publishTime>04/29/2019 18:50:28</publishTime>
+      <publishTime>05/02/2019 11:29:06</publishTime>
     </File>
     <File Include="Scripts/jquery-3.3.1.min.js">
-      <publishTime>04/29/2019 18:50:28</publishTime>
+      <publishTime>05/02/2019 11:29:06</publishTime>
     </File>
     <File Include="Scripts/jquery-3.3.1.min.map">
-      <publishTime>04/29/2019 18:50:28</publishTime>
+      <publishTime>05/02/2019 11:29:06</publishTime>
     </File>
     <File Include="Scripts/jquery-3.3.1.slim.js">
-      <publishTime>04/29/2019 18:50:28</publishTime>
+      <publishTime>05/02/2019 11:29:06</publishTime>
     </File>
     <File Include="Scripts/jquery-3.3.1.slim.min.js">
-      <publishTime>04/29/2019 18:50:28</publishTime>
+      <publishTime>05/02/2019 11:29:06</publishTime>
     </File>
     <File Include="Scripts/jquery-3.3.1.slim.min.map">
-      <publishTime>04/29/2019 18:50:28</publishTime>
+      <publishTime>05/02/2019 11:29:06</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.8.3.js">
-      <publishTime>04/29/2019 18:50:45</publishTime>
+      <publishTime>05/02/2019 11:29:06</publishTime>
+    </File>
+    <File Include="sing.html">
+      <publishTime>05/02/2019 11:29:56</publishTime>
+    </File>
+    <File Include="sketch.js">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="vendor/bootstrap/css/bootstrap.css">
+      <publishTime>05/02/2019 11:29:06</publishTime>
+    </File>
+    <File Include="vendor/bootstrap/css/bootstrap.css.map">
+      <publishTime>05/02/2019 11:29:06</publishTime>
+    </File>
+    <File Include="vendor/bootstrap/css/bootstrap.min.css">
+      <publishTime>05/02/2019 11:29:06</publishTime>
+    </File>
+    <File Include="vendor/bootstrap/css/bootstrap.min.css.map">
+      <publishTime>05/02/2019 11:29:06</publishTime>
+    </File>
+    <File Include="vendor/bootstrap/js/bootstrap.bundle.js">
+      <publishTime>05/02/2019 11:29:06</publishTime>
+    </File>
+    <File Include="vendor/bootstrap/js/bootstrap.bundle.js.map">
+      <publishTime>05/02/2019 11:29:06</publishTime>
+    </File>
+    <File Include="vendor/bootstrap/js/bootstrap.bundle.min.js">
+      <publishTime>05/02/2019 11:29:06</publishTime>
+    </File>
+    <File Include="vendor/bootstrap/js/bootstrap.bundle.min.js.map">
+      <publishTime>05/02/2019 11:29:06</publishTime>
+    </File>
+    <File Include="vendor/bootstrap/js/bootstrap.js">
+      <publishTime>05/02/2019 11:29:06</publishTime>
+    </File>
+    <File Include="vendor/bootstrap/js/bootstrap.js.map">
+      <publishTime>05/02/2019 11:29:06</publishTime>
+    </File>
+    <File Include="vendor/bootstrap/js/bootstrap.min.js">
+      <publishTime>05/02/2019 11:29:06</publishTime>
+    </File>
+    <File Include="vendor/bootstrap/js/bootstrap.min.js.map">
+      <publishTime>05/02/2019 11:29:06</publishTime>
+    </File>
+    <File Include="vendor/jquery/jquery.js">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="vendor/jquery/jquery.min.js">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="vendor/jquery/jquery.min.map">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="vendor/jquery/jquery.slim.js">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="vendor/jquery/jquery.slim.min.js">
+      <publishTime>05/02/2019 11:29:07</publishTime>
+    </File>
+    <File Include="vendor/jquery/jquery.slim.min.map">
+      <publishTime>05/02/2019 11:29:07</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>04/29/2019 18:50:14</publishTime>
@@ -433,7 +703,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>04/29/2019 19:04:15</publishTime>
     </File>
     <File Include="WebTecAirlines/buscar.html">
-      <publishTime>04/29/2019 19:04:15</publishTime>
+      <publishTime>05/02/2019 11:27:29</publishTime>
     </File>
     <File Include="WebTecAirlines/busquedaV.html">
       <publishTime>04/29/2019 19:04:15</publishTime>
@@ -580,7 +850,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>04/29/2019 19:04:15</publishTime>
     </File>
     <File Include="WebTecAirlines/js/log.js">
-      <publishTime>04/29/2019 19:04:15</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="WebTecAirlines/js/pago.js">
       <publishTime>04/29/2019 19:04:15</publishTime>
@@ -592,13 +862,13 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>04/29/2019 19:04:15</publishTime>
     </File>
     <File Include="WebTecAirlines/js/sing.js">
-      <publishTime>04/29/2019 19:04:15</publishTime>
+      <publishTime>05/01/2019 11:05:40</publishTime>
     </File>
     <File Include="WebTecAirlines/LICENSE">
       <publishTime>04/29/2019 19:04:15</publishTime>
     </File>
     <File Include="WebTecAirlines/log.html">
-      <publishTime>04/29/2019 19:04:15</publishTime>
+      <publishTime>05/01/2019 11:37:49</publishTime>
     </File>
     <File Include="WebTecAirlines/package-lock.json">
       <publishTime>04/29/2019 19:04:15</publishTime>
@@ -652,7 +922,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>04/30/2019 11:05:26</publishTime>
     </File>
     <File Include="WebTecAirlines/sing.html">
-      <publishTime>04/30/2019 12:19:39</publishTime>
+      <publishTime>05/01/2019 11:17:26</publishTime>
     </File>
     <File Include="WebTecAirlines/sketch.js">
       <publishTime>04/29/2019 19:04:15</publishTime>

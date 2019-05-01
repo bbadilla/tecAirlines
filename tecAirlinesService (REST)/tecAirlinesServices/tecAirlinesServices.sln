@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tecAirlinesServices", "tecAirlinesServices\tecAirlinesServices.csproj", "{91A9AE3C-5E43-4096-B37A-02F8135C826E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{26439BA1-4807-465B-BD77-9F28FF12659E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_LoginUsers", "API_LoginUsers\API_LoginUsers.csproj", "{472DA580-B046-41F5-A286-CD0D204648A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_Users", "API_LoginUsers\API_Users.csproj", "{472DA580-B046-41F5-A286-CD0D204648A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_Airport", "tecAirlinesServices\API_Airport.csproj", "{91A9AE3C-5E43-4096-B37A-02F8135C826E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{91A9AE3C-5E43-4096-B37A-02F8135C826E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{91A9AE3C-5E43-4096-B37A-02F8135C826E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{91A9AE3C-5E43-4096-B37A-02F8135C826E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{91A9AE3C-5E43-4096-B37A-02F8135C826E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{26439BA1-4807-465B-BD77-9F28FF12659E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{26439BA1-4807-465B-BD77-9F28FF12659E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26439BA1-4807-465B-BD77-9F28FF12659E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +23,10 @@ Global
 		{472DA580-B046-41F5-A286-CD0D204648A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{472DA580-B046-41F5-A286-CD0D204648A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{472DA580-B046-41F5-A286-CD0D204648A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91A9AE3C-5E43-4096-B37A-02F8135C826E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91A9AE3C-5E43-4096-B37A-02F8135C826E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91A9AE3C-5E43-4096-B37A-02F8135C826E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91A9AE3C-5E43-4096-B37A-02F8135C826E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -96,10 +96,10 @@ namespace tecAirlinesServices.Controllers
         /// Protocolo para actualizar un avion
         /// </summary>
         /// <param name="data"></param>
-        /// <returns></returns>
-        //[Route("api/airship/update")]
+        ///// <returns></returns>
+        [Route("api/flight/close")]
         [HttpPut]
-        public IHttpActionResult UpdateFlight([FromBody] FlightData data)
+        public IHttpActionResult CloseFlight([FromBody] FlightData data)
         {
             if (data == null)
             {
@@ -111,7 +111,34 @@ namespace tecAirlinesServices.Controllers
                 //petición correcta pero no pudo ser procesada porque no existe el archivo code 404
                 return NotFound();
             }
-            if (flightLogic.UpdateFlight(data))
+            if (flightLogic.CloseFlight(data))
+            {
+                //petición correcta y se ha creado un nuevo recurso code 200 ok
+                return Ok();
+            }
+            else
+            {
+                //No se pudo crear el recurso por un error  code 500
+                return InternalServerError();
+            }
+
+        }
+
+        [Route("api/flight/open")]
+        [HttpPut]
+        public IHttpActionResult OpenFlight([FromBody] FlightData data)
+        {
+            if (data == null)
+            {
+                //Bad request code 400
+                return BadRequest();
+            }
+            if (!flightLogic.ExistFlight(data.Codigo))
+            {
+                //petición correcta pero no pudo ser procesada porque no existe el archivo code 404
+                return NotFound();
+            }
+            if (flightLogic.OpenFlight(data))
             {
                 //petición correcta y se ha creado un nuevo recurso code 200 ok
                 return Ok();

@@ -16,6 +16,8 @@ namespace tecAirlinesServices.Controllers
     public class UsersController : ApiController
     {
         private UserLogic userLogic = new UserLogic();
+        private ProgramLogic  programLogic = new ProgramLogic();
+        private ReservationLogic reservationLogic = new ReservationLogic();
 
         /// <summary>
         /// Protocolos de obtener todos los usuarios
@@ -45,16 +47,16 @@ namespace tecAirlinesServices.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [Route("api/user/{id}")]
+        [Route("api/user/{id}/{id2}")]
         [HttpGet]
-        public IHttpActionResult GetUser(string id)
+        public IHttpActionResult GetUser(string id, string id2)
         {
             if (!userLogic.ExistUser(id))
             {
                 //No se encontró el recurso code 404
                 return NotFound();
             }
-            UserData user = userLogic.GetUser(id);
+            UserData user = userLogic.GetUser(id, id2);
             if (user != null)
             {
                 // ok code 200
@@ -101,19 +103,19 @@ namespace tecAirlinesServices.Controllers
         /// <returns></returns>
         //[Route("api/user/update")]
         [HttpPut]
-        public IHttpActionResult UpdateEmployee([FromBody] UserData data)
+        public IHttpActionResult UpdateEmployee([FromBody] ReservationData data)
         {
             if (data == null)
             {
                 //Bad request code 400
                 return BadRequest();
             }
-            if (!userLogic.ExistUser(data.Correo))
+            if (!reservationLogic.ExistReservation(data.Codigo))
             {
                 //petición correcta pero no pudo ser procesada porque no existe el archivo code 404
                 return NotFound();
             }
-            if (userLogic.UpdateUser(data))
+            if (reservationLogic.UpdateReservation(data))
             {
                 //petición correcta y se ha creado un nuevo recurso code 200 ok
                 return Ok();

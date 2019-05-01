@@ -116,18 +116,19 @@ namespace tecAirlinesServices.Logic
         {
             using (tecAirlinesEntities entities = new tecAirlinesEntities())
             {
-                Escala newScale = new Escala();
-                newScale.C_Vuelo = data.C_Vuelo;
-                newScale.A_Salida = data.A_Salida;
-                newScale.A_Llegada = data.A_Llegada;
-                newScale.F_Salida = data.F_Salida;
-                newScale.F_Llegada = data.F_Llegada;
+                //Escala newScale = new Escala();
+                //newScale.C_Vuelo = data.C_Vuelo;
+                //newScale.A_Salida = data.A_Salida;
+                //newScale.A_Llegada = data.A_Llegada;
+                //newScale.F_Salida = data.F_Salida;
+                //newScale.F_Llegada = data.F_Llegada;
 
 
                 try
                 {
-                    entities.Escalas.Add(newScale);
-                    entities.SaveChanges();
+                    //entities.Escalas.Add(newScale);
+                    //entities.SaveChanges();
+                    int entity = entities.udsp_ins_escala(data.C_Vuelo, data.A_Salida, data.A_Salida, data.F_Salida, data.F_Llegada);
                     return true;
                 }
                 catch (Exception e)

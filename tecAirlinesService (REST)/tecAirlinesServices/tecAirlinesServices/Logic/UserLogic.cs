@@ -131,7 +131,7 @@ namespace tecAirlinesServices.Logic
                     //entities.Usuarios.Add(newUser);
                     //entities.SaveChanges();
                    
-                    int entity = entities.Insertar_Usuario(data.Nombre, data.Apellido1, data.Apellido2, data.Telefono, data.Carne, data.Universidad, data.Correo, data.Contraseña);
+                    int entity = entities.udsp_ins_usuario(data.Nombre, data.Apellido1, data.Apellido2, data.Telefono, data.Carne, data.Universidad, data.Correo, data.Contraseña);
                     return true;
                 }
                 catch (Exception e)

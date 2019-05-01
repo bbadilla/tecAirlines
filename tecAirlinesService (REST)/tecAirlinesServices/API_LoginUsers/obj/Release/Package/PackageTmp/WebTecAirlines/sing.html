@@ -15,8 +15,8 @@
                 Apellido1: $("#Apellido1").val(),
                 Apellido2: $("#Apellido2").val(),
                 Telefono: $("#Telefono").val(),
-                Carne: $("#Carne").val(),
-                Universidad: $("#Universidad").val(),
+                Carne: $("#carne").val(),
+                Universidad: $("#uni").val(),
                 Correo: $("#Correo").val(),
                 Contraseña: $("#Contraseña").val()
             }
@@ -30,6 +30,7 @@
                 contentType: 'application/json',
                 success: function (data) {
                     $('#target').html(data.msg);
+                    alert("Registro valido");
                 },
                 data: JSON.stringify(person)
             });
@@ -48,12 +49,12 @@
           |   <input type="checkbox" name="producto"  onclick="habilita()"  /> Estudiante?
         
         <br/>
-        <div >
+        <div onsubmit="This.reset">
             <input id="Nombre" name="Nombre" type="text" placeholder="Nombre"/>
             <input id="Apellido1" name="Apellido1" type="text" placeholder="Apellido1" />
             <input id="Apellido2" name="Apellido2" type="text" placeholder="Apellido2"/>
             <input id="Telefono" name="Telefono" type="number" placeholder="Telefono"/>
-            <input type="text" name="Carne" id="carne" disabled="true" placeholder="Carne" />
+            <input type="number" name="Carne" id="carne" disabled="true" placeholder="Carne" />
             <input type="text" name="Universidad" id="uni" disabled="true" placeholder="Universidad" />
             <input id="Correo" name="Correo" type="text" placeholder="Correo"/>
             <input id="Contraseña" name="Contraseña" type="password" placeholder="Contraseña"/>

@@ -97,7 +97,7 @@ namespace tecAirlinesServices.Controllers
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        //[Route("api/airship/update")]
+        [Route("api/reservation/update")]
         [HttpPut]
         public IHttpActionResult UpdateReservation([FromBody] ReservationData data)
         {

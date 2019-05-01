@@ -4,30 +4,32 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4b2207a6a18a47789cd0c94fd3b85b27" Name="Diagram1">
-        <EntityTypeShape EntityType="tecAirlinesModel.Aeronave" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="tecAirlinesModel.airport" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="tecAirlinesModel.Reserva" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="tecAirlinesModel.Tarjeta" Width="1.5" PointX="7.5" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="tecAirlinesModel.Universidad" Width="1.5" PointX="7.5" PointY="14" IsExpanded="true" />
-        <EntityTypeShape EntityType="tecAirlinesModel.Usuario" Width="1.5" PointX="7.5" PointY="7.125" IsExpanded="true" />
+      <Diagram DiagramId="058f9eaa1b4941a6bb3149981df89bb3" Name="Diagram1">
+        <EntityTypeShape EntityType="tecAirlinesModel.Aeronave" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="tecAirlinesModel.airport" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="tecAirlinesModel.Pago" Width="1.5" PointX="10.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tecAirlinesModel.Reserva" Width="1.5" PointX="8.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tecAirlinesModel.Universidad" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="tecAirlinesModel.Usuario" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="tecAirlinesModel.Vuelo" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="tecAirlinesModel.Escala" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="tecAirlinesModel.Programa" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="tecAirlinesModel.Promocion" Width="1.5" PointX="9.75" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="tecAirlinesModel.Tiquete" Width="1.5" PointX="7.5" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="tecAirlinesModel.Escala" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tecAirlinesModel.Programa" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tecAirlinesModel.Promocion" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tecAirlinesModel.Tiquete" Width="1.5" PointX="10.5" PointY="9.25" IsExpanded="true" />
         <AssociationConnector Association="tecAirlinesModel.FK__Vuelo__ID_Aerona__48CFD27E" ManuallyRouted="false" />
-        <AssociationConnector Association="tecAirlinesModel.FK__Escala__A_Llegad__4E88ABD4" ManuallyRouted="false" />
-        <AssociationConnector Association="tecAirlinesModel.FK__Escala__A_Salida__4D94879B" ManuallyRouted="false" />
-        <AssociationConnector Association="tecAirlinesModel.FK__Reserva__C_Vuelo__5070F446" ManuallyRouted="false" />
-        <AssociationConnector Association="tecAirlinesModel.FK__Tarjeta__C_Reser__5535A963" ManuallyRouted="false" />
-        <AssociationConnector Association="tecAirlinesModel.FK__Tiquete__C_Reser__5165187F" ManuallyRouted="false" />
-        <AssociationConnector Association="tecAirlinesModel.FK__Programa__ID_Uni__44FF419A" ManuallyRouted="false" />
-        <AssociationConnector Association="tecAirlinesModel.FK__Programa__C_Usua__440B1D61" ManuallyRouted="false" />
-        <AssociationConnector Association="tecAirlinesModel.FK__Promocion__C_Usu__49C3F6B7" ManuallyRouted="false" />
-        <AssociationConnector Association="tecAirlinesModel.FK__Escala__C_Vuelo__4CA06362" ManuallyRouted="false" />
-        <AssociationConnector Association="tecAirlinesModel.FK__Promocion__C_Vue__4AB81AF0" ManuallyRouted="false" />
-        <AssociationConnector Association="tecAirlinesModel.Reservaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="tecAirlinesModel.FK__Escala__A_Llegad__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="tecAirlinesModel.FK__Escala__A_Salida__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="tecAirlinesModel.FK__Vuelo__A_Llegada__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="tecAirlinesModel.FK__Vuelo__A_Salida__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="tecAirlinesModel.FK__Pago__C_Reserva__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="tecAirlinesModel.FK__Reserva__C_Usuar__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="tecAirlinesModel.FK__Reserva__C_Vuelo__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="tecAirlinesModel.FK__Tiquete__C_Reser__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="tecAirlinesModel.FK__Programa__ID_Uni__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="tecAirlinesModel.FK__Programa__C_Usua__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="tecAirlinesModel.FK__Promocion__C_Usu__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="tecAirlinesModel.FK__Escala__C_Vuelo__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="tecAirlinesModel.FK__Promocion__C_Vue__4CA06362" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

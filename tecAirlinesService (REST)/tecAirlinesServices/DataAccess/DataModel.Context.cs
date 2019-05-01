@@ -29,8 +29,8 @@ namespace DataAccess
     
         public virtual DbSet<Aeronave> Aeronaves { get; set; }
         public virtual DbSet<airport> airports { get; set; }
+        public virtual DbSet<Pago> Pagoes { get; set; }
         public virtual DbSet<Reserva> Reservas { get; set; }
-        public virtual DbSet<Tarjeta> Tarjetas { get; set; }
         public virtual DbSet<Universidad> Universidads { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
         public virtual DbSet<Vuelo> Vueloes { get; set; }
@@ -39,30 +39,104 @@ namespace DataAccess
         public virtual DbSet<Promocion> Promocions { get; set; }
         public virtual DbSet<Tiquete> Tiquetes { get; set; }
     
-        public virtual int Insertar_Aeronave()
+        public virtual int udsp_ins_escala(string c_Vuelo, string a_Salida, string a_Llegada, Nullable<System.DateTime> f_Salida, Nullable<System.DateTime> f_Llegada)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insertar_Aeronave");
+            var c_VueloParameter = c_Vuelo != null ?
+                new ObjectParameter("C_Vuelo", c_Vuelo) :
+                new ObjectParameter("C_Vuelo", typeof(string));
+    
+            var a_SalidaParameter = a_Salida != null ?
+                new ObjectParameter("A_Salida", a_Salida) :
+                new ObjectParameter("A_Salida", typeof(string));
+    
+            var a_LlegadaParameter = a_Llegada != null ?
+                new ObjectParameter("A_Llegada", a_Llegada) :
+                new ObjectParameter("A_Llegada", typeof(string));
+    
+            var f_SalidaParameter = f_Salida.HasValue ?
+                new ObjectParameter("F_Salida", f_Salida) :
+                new ObjectParameter("F_Salida", typeof(System.DateTime));
+    
+            var f_LlegadaParameter = f_Llegada.HasValue ?
+                new ObjectParameter("F_Llegada", f_Llegada) :
+                new ObjectParameter("F_Llegada", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("udsp_ins_escala", c_VueloParameter, a_SalidaParameter, a_LlegadaParameter, f_SalidaParameter, f_LlegadaParameter);
         }
     
-        public virtual int Insertar_Tiquete()
+        public virtual int udsp_ins_pago(Nullable<int> numero, Nullable<int> contraseña, Nullable<System.DateTime> expiracion, string titular, Nullable<int> c_Reserva)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insertar_Tiquete");
+            var numeroParameter = numero.HasValue ?
+                new ObjectParameter("Numero", numero) :
+                new ObjectParameter("Numero", typeof(int));
+    
+            var contraseñaParameter = contraseña.HasValue ?
+                new ObjectParameter("Contraseña", contraseña) :
+                new ObjectParameter("Contraseña", typeof(int));
+    
+            var expiracionParameter = expiracion.HasValue ?
+                new ObjectParameter("Expiracion", expiracion) :
+                new ObjectParameter("Expiracion", typeof(System.DateTime));
+    
+            var titularParameter = titular != null ?
+                new ObjectParameter("Titular", titular) :
+                new ObjectParameter("Titular", typeof(string));
+    
+            var c_ReservaParameter = c_Reserva.HasValue ?
+                new ObjectParameter("C_Reserva", c_Reserva) :
+                new ObjectParameter("C_Reserva", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("udsp_ins_pago", numeroParameter, contraseñaParameter, expiracionParameter, titularParameter, c_ReservaParameter);
         }
     
-        public virtual int Insertar_Universidad(Nullable<int> identificador, string nombre)
+        public virtual int udsp_ins_reserva(string c_Usuario, string c_Vuelo, Nullable<int> c_Economico, Nullable<int> c_Ejecutivo)
         {
-            var identificadorParameter = identificador.HasValue ?
-                new ObjectParameter("Identificador", identificador) :
-                new ObjectParameter("Identificador", typeof(int));
+            var c_UsuarioParameter = c_Usuario != null ?
+                new ObjectParameter("C_Usuario", c_Usuario) :
+                new ObjectParameter("C_Usuario", typeof(string));
     
+            var c_VueloParameter = c_Vuelo != null ?
+                new ObjectParameter("C_Vuelo", c_Vuelo) :
+                new ObjectParameter("C_Vuelo", typeof(string));
+    
+            var c_EconomicoParameter = c_Economico.HasValue ?
+                new ObjectParameter("C_Economico", c_Economico) :
+                new ObjectParameter("C_Economico", typeof(int));
+    
+            var c_EjecutivoParameter = c_Ejecutivo.HasValue ?
+                new ObjectParameter("C_Ejecutivo", c_Ejecutivo) :
+                new ObjectParameter("C_Ejecutivo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("udsp_ins_reserva", c_UsuarioParameter, c_VueloParameter, c_EconomicoParameter, c_EjecutivoParameter);
+        }
+    
+        public virtual int udsp_ins_tiquete(Nullable<int> iteraciones, Nullable<int> c_Reserva, Nullable<int> categoria)
+        {
+            var iteracionesParameter = iteraciones.HasValue ?
+                new ObjectParameter("Iteraciones", iteraciones) :
+                new ObjectParameter("Iteraciones", typeof(int));
+    
+            var c_ReservaParameter = c_Reserva.HasValue ?
+                new ObjectParameter("C_Reserva", c_Reserva) :
+                new ObjectParameter("C_Reserva", typeof(int));
+    
+            var categoriaParameter = categoria.HasValue ?
+                new ObjectParameter("Categoria", categoria) :
+                new ObjectParameter("Categoria", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("udsp_ins_tiquete", iteracionesParameter, c_ReservaParameter, categoriaParameter);
+        }
+    
+        public virtual int udsp_ins_universidad(string nombre)
+        {
             var nombreParameter = nombre != null ?
                 new ObjectParameter("Nombre", nombre) :
                 new ObjectParameter("Nombre", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insertar_Universidad", identificadorParameter, nombreParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("udsp_ins_universidad", nombreParameter);
         }
     
-        public virtual int Insertar_Usuario(string nombre, string apellido1, string apellido2, Nullable<int> telefono, Nullable<int> carne, string universidad, string correo, string contraseña)
+        public virtual int udsp_ins_usuario(string nombre, string apellido1, string apellido2, Nullable<int> telefono, Nullable<int> carne, string universidad, string correo, string contraseña)
         {
             var nombreParameter = nombre != null ?
                 new ObjectParameter("Nombre", nombre) :
@@ -96,14 +170,30 @@ namespace DataAccess
                 new ObjectParameter("Contraseña", contraseña) :
                 new ObjectParameter("Contraseña", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insertar_Usuario", nombreParameter, apellido1Parameter, apellido2Parameter, telefonoParameter, carneParameter, universidadParameter, correoParameter, contraseñaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("udsp_ins_usuario", nombreParameter, apellido1Parameter, apellido2Parameter, telefonoParameter, carneParameter, universidadParameter, correoParameter, contraseñaParameter);
         }
     
-        public virtual int sp_ins_escala(string c_Vuelo, string a_Salida, string a_Llegada, Nullable<System.TimeSpan> f_Salida, Nullable<System.TimeSpan> f_Llegada)
+        public virtual int udsp_ins_vuelo(string codigo, Nullable<int> c_Economico, Nullable<int> c_Ejecutivo, Nullable<System.DateTime> f_Salida, Nullable<System.DateTime> f_Llegada, string a_Salida, string a_Llegada, Nullable<int> millas, Nullable<int> iD_Aeronave)
         {
-            var c_VueloParameter = c_Vuelo != null ?
-                new ObjectParameter("C_Vuelo", c_Vuelo) :
-                new ObjectParameter("C_Vuelo", typeof(string));
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("Codigo", codigo) :
+                new ObjectParameter("Codigo", typeof(string));
+    
+            var c_EconomicoParameter = c_Economico.HasValue ?
+                new ObjectParameter("C_Economico", c_Economico) :
+                new ObjectParameter("C_Economico", typeof(int));
+    
+            var c_EjecutivoParameter = c_Ejecutivo.HasValue ?
+                new ObjectParameter("C_Ejecutivo", c_Ejecutivo) :
+                new ObjectParameter("C_Ejecutivo", typeof(int));
+    
+            var f_SalidaParameter = f_Salida.HasValue ?
+                new ObjectParameter("F_Salida", f_Salida) :
+                new ObjectParameter("F_Salida", typeof(System.DateTime));
+    
+            var f_LlegadaParameter = f_Llegada.HasValue ?
+                new ObjectParameter("F_Llegada", f_Llegada) :
+                new ObjectParameter("F_Llegada", typeof(System.DateTime));
     
             var a_SalidaParameter = a_Salida != null ?
                 new ObjectParameter("A_Salida", a_Salida) :
@@ -113,35 +203,6 @@ namespace DataAccess
                 new ObjectParameter("A_Llegada", a_Llegada) :
                 new ObjectParameter("A_Llegada", typeof(string));
     
-            var f_SalidaParameter = f_Salida.HasValue ?
-                new ObjectParameter("F_Salida", f_Salida) :
-                new ObjectParameter("F_Salida", typeof(System.TimeSpan));
-    
-            var f_LlegadaParameter = f_Llegada.HasValue ?
-                new ObjectParameter("F_Llegada", f_Llegada) :
-                new ObjectParameter("F_Llegada", typeof(System.TimeSpan));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ins_escala", c_VueloParameter, a_SalidaParameter, a_LlegadaParameter, f_SalidaParameter, f_LlegadaParameter);
-        }
-    
-        public virtual int sp_ins_vuelo(string codigo, Nullable<int> costo, Nullable<System.TimeSpan> f_Salida, Nullable<System.TimeSpan> f_Llegada, Nullable<int> millas, Nullable<int> iD_Aeronave, Nullable<int> a_Economicos, Nullable<int> a_Ejecutivos)
-        {
-            var codigoParameter = codigo != null ?
-                new ObjectParameter("Codigo", codigo) :
-                new ObjectParameter("Codigo", typeof(string));
-    
-            var costoParameter = costo.HasValue ?
-                new ObjectParameter("Costo", costo) :
-                new ObjectParameter("Costo", typeof(int));
-    
-            var f_SalidaParameter = f_Salida.HasValue ?
-                new ObjectParameter("F_Salida", f_Salida) :
-                new ObjectParameter("F_Salida", typeof(System.TimeSpan));
-    
-            var f_LlegadaParameter = f_Llegada.HasValue ?
-                new ObjectParameter("F_Llegada", f_Llegada) :
-                new ObjectParameter("F_Llegada", typeof(System.TimeSpan));
-    
             var millasParameter = millas.HasValue ?
                 new ObjectParameter("Millas", millas) :
                 new ObjectParameter("Millas", typeof(int));
@@ -150,15 +211,51 @@ namespace DataAccess
                 new ObjectParameter("ID_Aeronave", iD_Aeronave) :
                 new ObjectParameter("ID_Aeronave", typeof(int));
     
-            var a_EconomicosParameter = a_Economicos.HasValue ?
-                new ObjectParameter("A_Economicos", a_Economicos) :
-                new ObjectParameter("A_Economicos", typeof(int));
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("udsp_ins_vuelo", codigoParameter, c_EconomicoParameter, c_EjecutivoParameter, f_SalidaParameter, f_LlegadaParameter, a_SalidaParameter, a_LlegadaParameter, millasParameter, iD_AeronaveParameter);
+        }
     
-            var a_EjecutivosParameter = a_Ejecutivos.HasValue ?
-                new ObjectParameter("A_Ejecutivos", a_Ejecutivos) :
-                new ObjectParameter("A_Ejecutivos", typeof(int));
+        public virtual int udsp_up_abrirvuelo(string c_Vuelo)
+        {
+            var c_VueloParameter = c_Vuelo != null ?
+                new ObjectParameter("C_Vuelo", c_Vuelo) :
+                new ObjectParameter("C_Vuelo", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ins_vuelo", codigoParameter, costoParameter, f_SalidaParameter, f_LlegadaParameter, millasParameter, iD_AeronaveParameter, a_EconomicosParameter, a_EjecutivosParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("udsp_up_abrirvuelo", c_VueloParameter);
+        }
+    
+        public virtual int udsp_up_cerrarvuelo(string c_Vuelo)
+        {
+            var c_VueloParameter = c_Vuelo != null ?
+                new ObjectParameter("C_Vuelo", c_Vuelo) :
+                new ObjectParameter("C_Vuelo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("udsp_up_cerrarvuelo", c_VueloParameter);
+        }
+    
+        public virtual int udsp_up_reserva(Nullable<int> c_Reserva, Nullable<int> c_Maletas)
+        {
+            var c_ReservaParameter = c_Reserva.HasValue ?
+                new ObjectParameter("C_Reserva", c_Reserva) :
+                new ObjectParameter("C_Reserva", typeof(int));
+    
+            var c_MaletasParameter = c_Maletas.HasValue ?
+                new ObjectParameter("C_Maletas", c_Maletas) :
+                new ObjectParameter("C_Maletas", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("udsp_up_reserva", c_ReservaParameter, c_MaletasParameter);
+        }
+    
+        public virtual int udsp_up_tiquete(Nullable<int> identificador, Nullable<int> n_Asiento)
+        {
+            var identificadorParameter = identificador.HasValue ?
+                new ObjectParameter("Identificador", identificador) :
+                new ObjectParameter("Identificador", typeof(int));
+    
+            var n_AsientoParameter = n_Asiento.HasValue ?
+                new ObjectParameter("N_Asiento", n_Asiento) :
+                new ObjectParameter("N_Asiento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("udsp_up_tiquete", identificadorParameter, n_AsientoParameter);
         }
     }
 }

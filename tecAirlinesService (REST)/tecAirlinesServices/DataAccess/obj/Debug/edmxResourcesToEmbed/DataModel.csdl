@@ -4,9 +4,11 @@
     <Key>
       <PropertyRef Name="Identificador" />
     </Key>
-    <Property Name="Identificador" Type="Int32" Nullable="false" />
-    <Property Name="Modelo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Identificador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Modelo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Capacidad" Type="Int32" Nullable="false" />
+    <Property Name="A_Economicos" Type="Int32" Nullable="false" />
+    <Property Name="A_Ejecutivos" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Vueloes" Relationship="Self.FK__Vuelo__ID_Aerona__48CFD27E" FromRole="Aeronave" ToRole="Vuelo" />
   </EntityType>
   <EntityType Name="airport">
@@ -18,23 +20,12 @@
     <Property Name="C_Estado" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
     <Property Name="C_Pais" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="N_Pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Escalas" Relationship="Self.FK__Escala__A_Llegad__4E88ABD4" FromRole="airports" ToRole="Escala" />
-    <NavigationProperty Name="Escalas1" Relationship="Self.FK__Escala__A_Salida__4D94879B" FromRole="airports" ToRole="Escala" />
+    <NavigationProperty Name="Escalas" Relationship="Self.FK__Escala__A_Llegad__4F7CD00D" FromRole="airports" ToRole="Escala" />
+    <NavigationProperty Name="Escalas1" Relationship="Self.FK__Escala__A_Salida__4E88ABD4" FromRole="airports" ToRole="Escala" />
+    <NavigationProperty Name="Vueloes" Relationship="Self.FK__Vuelo__A_Llegada__4AB81AF0" FromRole="airports" ToRole="Vuelo" />
+    <NavigationProperty Name="Vueloes1" Relationship="Self.FK__Vuelo__A_Salida__49C3F6B7" FromRole="airports" ToRole="Vuelo" />
   </EntityType>
-  <EntityType Name="Reserva">
-    <Key>
-      <PropertyRef Name="Codigo" />
-    </Key>
-    <Property Name="Codigo" Type="Int32" Nullable="false" />
-    <Property Name="Chequeo" Type="Boolean" Nullable="false" />
-    <Property Name="Equipaje" Type="Int32" Nullable="false" />
-    <Property Name="C_Vuelo" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Vuelo" Relationship="Self.FK__Reserva__C_Vuelo__5070F446" FromRole="Reserva" ToRole="Vuelo" />
-    <NavigationProperty Name="Tarjetas" Relationship="Self.FK__Tarjeta__C_Reser__5535A963" FromRole="Reserva" ToRole="Tarjeta" />
-    <NavigationProperty Name="Tiquetes" Relationship="Self.FK__Tiquete__C_Reser__5165187F" FromRole="Reserva" ToRole="Tiquete" />
-    <NavigationProperty Name="Usuarios" Relationship="Self.Reservaciones" FromRole="Reserva" ToRole="Usuario" />
-  </EntityType>
-  <EntityType Name="Tarjeta">
+  <EntityType Name="Pago">
     <Key>
       <PropertyRef Name="Numero" />
     </Key>
@@ -43,15 +34,30 @@
     <Property Name="Expiracion" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Titular" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="C_Reserva" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Reserva" Relationship="Self.FK__Tarjeta__C_Reser__5535A963" FromRole="Tarjeta" ToRole="Reserva" />
+    <NavigationProperty Name="Reserva" Relationship="Self.FK__Pago__C_Reserva__5812160E" FromRole="Pago" ToRole="Reserva" />
+  </EntityType>
+  <EntityType Name="Reserva">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="C_Usuario" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Chequeo" Type="Boolean" Nullable="false" />
+    <Property Name="Pago" Type="Boolean" Nullable="false" />
+    <Property Name="Equipaje" Type="Int32" Nullable="false" />
+    <Property Name="C_Vuelo" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Pagoes" Relationship="Self.FK__Pago__C_Reserva__5812160E" FromRole="Reserva" ToRole="Pago" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__Reserva__C_Usuar__5535A963" FromRole="Reserva" ToRole="Usuario" />
+    <NavigationProperty Name="Vuelo" Relationship="Self.FK__Reserva__C_Vuelo__5441852A" FromRole="Reserva" ToRole="Vuelo" />
+    <NavigationProperty Name="Tiquetes" Relationship="Self.FK__Tiquete__C_Reser__5629CD9C" FromRole="Reserva" ToRole="Tiquete" />
   </EntityType>
   <EntityType Name="Universidad">
     <Key>
       <PropertyRef Name="Identificador" />
     </Key>
-    <Property Name="Identificador" Type="Int32" Nullable="false" />
+    <Property Name="Identificador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Nombre" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Programas" Relationship="Self.FK__Programa__ID_Uni__44FF419A" FromRole="Universidad" ToRole="Programa" />
+    <NavigationProperty Name="Programas" Relationship="Self.FK__Programa__ID_Uni__440B1D61" FromRole="Universidad" ToRole="Programa" />
   </EntityType>
   <EntityType Name="Usuario">
     <Key>
@@ -65,27 +71,30 @@
     <Property Name="Universidad" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
     <Property Name="Correo" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Contraseña" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Programas" Relationship="Self.FK__Programa__C_Usua__440B1D61" FromRole="Usuario" ToRole="Programa" />
-    <NavigationProperty Name="Promocions" Relationship="Self.FK__Promocion__C_Usu__49C3F6B7" FromRole="Usuario" ToRole="Promocion" />
-    <NavigationProperty Name="Reservas" Relationship="Self.Reservaciones" FromRole="Usuario" ToRole="Reserva" />
+    <NavigationProperty Name="Reservas" Relationship="Self.FK__Reserva__C_Usuar__5535A963" FromRole="Usuario" ToRole="Reserva" />
+    <NavigationProperty Name="Programas" Relationship="Self.FK__Programa__C_Usua__4316F928" FromRole="Usuario" ToRole="Programa" />
+    <NavigationProperty Name="Promocions" Relationship="Self.FK__Promocion__C_Usu__4BAC3F29" FromRole="Usuario" ToRole="Promocion" />
   </EntityType>
   <EntityType Name="Vuelo">
     <Key>
       <PropertyRef Name="Codigo" />
     </Key>
-    <Property Name="Codigo" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Codigo" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Estado" Type="Boolean" />
-    <Property Name="Costo" Type="Int32" Nullable="false" />
+    <Property Name="C_Economico" Type="Int32" Nullable="false" />
+    <Property Name="C_Ejecutivo" Type="Int32" Nullable="false" />
     <Property Name="F_Salida" Type="DateTime" Precision="3" />
     <Property Name="F_Llegada" Type="DateTime" Precision="3" />
+    <Property Name="A_Salida" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="A_Llegada" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Millas" Type="Int32" Nullable="false" />
     <Property Name="ID_Aeronave" Type="Int32" Nullable="false" />
-    <Property Name="A_Economicos" Type="Int32" Nullable="false" />
-    <Property Name="A_Ejecutivos" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Aeronave" Relationship="Self.FK__Vuelo__ID_Aerona__48CFD27E" FromRole="Vuelo" ToRole="Aeronave" />
-    <NavigationProperty Name="Reservas" Relationship="Self.FK__Reserva__C_Vuelo__5070F446" FromRole="Vuelo" ToRole="Reserva" />
-    <NavigationProperty Name="Escalas" Relationship="Self.FK__Escala__C_Vuelo__4CA06362" FromRole="Vuelo" ToRole="Escala" />
-    <NavigationProperty Name="Promocions" Relationship="Self.FK__Promocion__C_Vue__4AB81AF0" FromRole="Vuelo" ToRole="Promocion" />
+    <NavigationProperty Name="airport" Relationship="Self.FK__Vuelo__A_Llegada__4AB81AF0" FromRole="Vuelo" ToRole="airports" />
+    <NavigationProperty Name="airport1" Relationship="Self.FK__Vuelo__A_Salida__49C3F6B7" FromRole="Vuelo" ToRole="airports" />
+    <NavigationProperty Name="Reservas" Relationship="Self.FK__Reserva__C_Vuelo__5441852A" FromRole="Vuelo" ToRole="Reserva" />
+    <NavigationProperty Name="Escalas" Relationship="Self.FK__Escala__C_Vuelo__4D94879B" FromRole="Vuelo" ToRole="Escala" />
+    <NavigationProperty Name="Promocions" Relationship="Self.FK__Promocion__C_Vue__4CA06362" FromRole="Vuelo" ToRole="Promocion" />
   </EntityType>
   <EntityType Name="Escala">
     <Key>
@@ -95,14 +104,14 @@
       <PropertyRef Name="F_Salida" />
       <PropertyRef Name="F_Llegada" />
     </Key>
-    <Property Name="C_Vuelo" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="C_Vuelo" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="A_Salida" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="A_Llegada" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="F_Salida" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="F_Llegada" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="airport" Relationship="Self.FK__Escala__A_Llegad__4E88ABD4" FromRole="Escala" ToRole="airports" />
-    <NavigationProperty Name="airport1" Relationship="Self.FK__Escala__A_Salida__4D94879B" FromRole="Escala" ToRole="airports" />
-    <NavigationProperty Name="Vuelo" Relationship="Self.FK__Escala__C_Vuelo__4CA06362" FromRole="Escala" ToRole="Vuelo" />
+    <NavigationProperty Name="airport" Relationship="Self.FK__Escala__A_Llegad__4F7CD00D" FromRole="Escala" ToRole="airports" />
+    <NavigationProperty Name="airport1" Relationship="Self.FK__Escala__A_Salida__4E88ABD4" FromRole="Escala" ToRole="airports" />
+    <NavigationProperty Name="Vuelo" Relationship="Self.FK__Escala__C_Vuelo__4D94879B" FromRole="Escala" ToRole="Vuelo" />
   </EntityType>
   <EntityType Name="Programa">
     <Key>
@@ -112,8 +121,8 @@
     <Property Name="C_Usuario" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="ID_Universidad" Type="Int32" Nullable="false" />
     <Property Name="Millas" Type="Int32" />
-    <NavigationProperty Name="Universidad" Relationship="Self.FK__Programa__ID_Uni__44FF419A" FromRole="Programa" ToRole="Universidad" />
-    <NavigationProperty Name="Usuario" Relationship="Self.FK__Programa__C_Usua__440B1D61" FromRole="Programa" ToRole="Usuario" />
+    <NavigationProperty Name="Universidad" Relationship="Self.FK__Programa__ID_Uni__440B1D61" FromRole="Programa" ToRole="Universidad" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__Programa__C_Usua__4316F928" FromRole="Programa" ToRole="Usuario" />
   </EntityType>
   <EntityType Name="Promocion">
     <Key>
@@ -125,24 +134,25 @@
       <PropertyRef Name="Imagen" />
     </Key>
     <Property Name="C_Usuario" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="C_Vuelo" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="C_Vuelo" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="F_Inicio" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="F_Fin" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Porcentaje" Type="Int32" Nullable="false" />
     <Property Name="Imagen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Usuario" Relationship="Self.FK__Promocion__C_Usu__49C3F6B7" FromRole="Promocion" ToRole="Usuario" />
-    <NavigationProperty Name="Vuelo" Relationship="Self.FK__Promocion__C_Vue__4AB81AF0" FromRole="Promocion" ToRole="Vuelo" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__Promocion__C_Usu__4BAC3F29" FromRole="Promocion" ToRole="Usuario" />
+    <NavigationProperty Name="Vuelo" Relationship="Self.FK__Promocion__C_Vue__4CA06362" FromRole="Promocion" ToRole="Vuelo" />
   </EntityType>
   <EntityType Name="Tiquete">
     <Key>
+      <PropertyRef Name="Identificador" />
       <PropertyRef Name="C_Reserva" />
       <PropertyRef Name="Categoria" />
-      <PropertyRef Name="N_Asiento" />
     </Key>
+    <Property Name="Identificador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="C_Reserva" Type="Int32" Nullable="false" />
     <Property Name="Categoria" Type="Int32" Nullable="false" />
-    <Property Name="N_Asiento" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Reserva" Relationship="Self.FK__Tiquete__C_Reser__5165187F" FromRole="Tiquete" ToRole="Reserva" />
+    <Property Name="N_Asiento" Type="Int32" />
+    <NavigationProperty Name="Reserva" Relationship="Self.FK__Tiquete__C_Reser__5629CD9C" FromRole="Tiquete" ToRole="Reserva" />
   </EntityType>
   <Association Name="FK__Vuelo__ID_Aerona__48CFD27E">
     <End Role="Aeronave" Type="Self.Aeronave" Multiplicity="1" />
@@ -156,7 +166,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Escala__A_Llegad__4E88ABD4">
+  <Association Name="FK__Escala__A_Llegad__4F7CD00D">
     <End Role="airports" Type="Self.airport" Multiplicity="1" />
     <End Role="Escala" Type="Self.Escala" Multiplicity="*" />
     <ReferentialConstraint>
@@ -168,7 +178,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Escala__A_Salida__4D94879B">
+  <Association Name="FK__Escala__A_Salida__4E88ABD4">
     <End Role="airports" Type="Self.airport" Multiplicity="1" />
     <End Role="Escala" Type="Self.Escala" Multiplicity="*" />
     <ReferentialConstraint>
@@ -180,7 +190,55 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Reserva__C_Vuelo__5070F446">
+  <Association Name="FK__Vuelo__A_Llegada__4AB81AF0">
+    <End Role="airports" Type="Self.airport" Multiplicity="1" />
+    <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="airports">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Vuelo">
+        <PropertyRef Name="A_Llegada" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vuelo__A_Salida__49C3F6B7">
+    <End Role="airports" Type="Self.airport" Multiplicity="1" />
+    <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="airports">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Vuelo">
+        <PropertyRef Name="A_Salida" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Pago__C_Reserva__5812160E">
+    <End Role="Reserva" Type="Self.Reserva" Multiplicity="1" />
+    <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reserva">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Pago">
+        <PropertyRef Name="C_Reserva" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reserva__C_Usuar__5535A963">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Correo" />
+      </Principal>
+      <Dependent Role="Reserva">
+        <PropertyRef Name="C_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reserva__C_Vuelo__5441852A">
     <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="1" />
     <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
     <ReferentialConstraint>
@@ -192,19 +250,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Tarjeta__C_Reser__5535A963">
-    <End Role="Reserva" Type="Self.Reserva" Multiplicity="1" />
-    <End Role="Tarjeta" Type="Self.Tarjeta" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Reserva">
-        <PropertyRef Name="Codigo" />
-      </Principal>
-      <Dependent Role="Tarjeta">
-        <PropertyRef Name="C_Reserva" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Tiquete__C_Reser__5165187F">
+  <Association Name="FK__Tiquete__C_Reser__5629CD9C">
     <End Role="Reserva" Type="Self.Reserva" Multiplicity="1" />
     <End Role="Tiquete" Type="Self.Tiquete" Multiplicity="*" />
     <ReferentialConstraint>
@@ -216,7 +262,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Programa__ID_Uni__44FF419A">
+  <Association Name="FK__Programa__ID_Uni__440B1D61">
     <End Role="Universidad" Type="Self.Universidad" Multiplicity="1" />
     <End Role="Programa" Type="Self.Programa" Multiplicity="*" />
     <ReferentialConstraint>
@@ -228,7 +274,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Programa__C_Usua__440B1D61">
+  <Association Name="FK__Programa__C_Usua__4316F928">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
     <End Role="Programa" Type="Self.Programa" Multiplicity="*" />
     <ReferentialConstraint>
@@ -240,7 +286,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Promocion__C_Usu__49C3F6B7">
+  <Association Name="FK__Promocion__C_Usu__4BAC3F29">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
     <End Role="Promocion" Type="Self.Promocion" Multiplicity="*" />
     <ReferentialConstraint>
@@ -252,7 +298,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Escala__C_Vuelo__4CA06362">
+  <Association Name="FK__Escala__C_Vuelo__4D94879B">
     <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="1" />
     <End Role="Escala" Type="Self.Escala" Multiplicity="*" />
     <ReferentialConstraint>
@@ -264,7 +310,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Promocion__C_Vue__4AB81AF0">
+  <Association Name="FK__Promocion__C_Vue__4CA06362">
     <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="1" />
     <End Role="Promocion" Type="Self.Promocion" Multiplicity="*" />
     <ReferentialConstraint>
@@ -276,15 +322,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="Reservaciones">
-    <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
-    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
-  </Association>
   <EntityContainer Name="tecAirlinesEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Aeronaves" EntityType="Self.Aeronave" />
     <EntitySet Name="airports" EntityType="Self.airport" />
+    <EntitySet Name="Pagoes" EntityType="Self.Pago" />
     <EntitySet Name="Reservas" EntityType="Self.Reserva" />
-    <EntitySet Name="Tarjetas" EntityType="Self.Tarjeta" />
     <EntitySet Name="Universidads" EntityType="Self.Universidad" />
     <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
     <EntitySet Name="Vueloes" EntityType="Self.Vuelo" />
@@ -296,57 +338,87 @@
       <End Role="Aeronave" EntitySet="Aeronaves" />
       <End Role="Vuelo" EntitySet="Vueloes" />
     </AssociationSet>
-    <AssociationSet Name="FK__Escala__A_Llegad__4E88ABD4" Association="Self.FK__Escala__A_Llegad__4E88ABD4">
+    <AssociationSet Name="FK__Escala__A_Llegad__4F7CD00D" Association="Self.FK__Escala__A_Llegad__4F7CD00D">
       <End Role="airports" EntitySet="airports" />
       <End Role="Escala" EntitySet="Escalas" />
     </AssociationSet>
-    <AssociationSet Name="FK__Escala__A_Salida__4D94879B" Association="Self.FK__Escala__A_Salida__4D94879B">
+    <AssociationSet Name="FK__Escala__A_Salida__4E88ABD4" Association="Self.FK__Escala__A_Salida__4E88ABD4">
       <End Role="airports" EntitySet="airports" />
       <End Role="Escala" EntitySet="Escalas" />
     </AssociationSet>
-    <AssociationSet Name="FK__Reserva__C_Vuelo__5070F446" Association="Self.FK__Reserva__C_Vuelo__5070F446">
+    <AssociationSet Name="FK__Vuelo__A_Llegada__4AB81AF0" Association="Self.FK__Vuelo__A_Llegada__4AB81AF0">
+      <End Role="airports" EntitySet="airports" />
+      <End Role="Vuelo" EntitySet="Vueloes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vuelo__A_Salida__49C3F6B7" Association="Self.FK__Vuelo__A_Salida__49C3F6B7">
+      <End Role="airports" EntitySet="airports" />
+      <End Role="Vuelo" EntitySet="Vueloes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Pago__C_Reserva__5812160E" Association="Self.FK__Pago__C_Reserva__5812160E">
+      <End Role="Reserva" EntitySet="Reservas" />
+      <End Role="Pago" EntitySet="Pagoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reserva__C_Usuar__5535A963" Association="Self.FK__Reserva__C_Usuar__5535A963">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="Reserva" EntitySet="Reservas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reserva__C_Vuelo__5441852A" Association="Self.FK__Reserva__C_Vuelo__5441852A">
       <End Role="Vuelo" EntitySet="Vueloes" />
       <End Role="Reserva" EntitySet="Reservas" />
     </AssociationSet>
-    <AssociationSet Name="FK__Tarjeta__C_Reser__5535A963" Association="Self.FK__Tarjeta__C_Reser__5535A963">
-      <End Role="Reserva" EntitySet="Reservas" />
-      <End Role="Tarjeta" EntitySet="Tarjetas" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Tiquete__C_Reser__5165187F" Association="Self.FK__Tiquete__C_Reser__5165187F">
+    <AssociationSet Name="FK__Tiquete__C_Reser__5629CD9C" Association="Self.FK__Tiquete__C_Reser__5629CD9C">
       <End Role="Reserva" EntitySet="Reservas" />
       <End Role="Tiquete" EntitySet="Tiquetes" />
     </AssociationSet>
-    <AssociationSet Name="FK__Programa__ID_Uni__44FF419A" Association="Self.FK__Programa__ID_Uni__44FF419A">
+    <AssociationSet Name="FK__Programa__ID_Uni__440B1D61" Association="Self.FK__Programa__ID_Uni__440B1D61">
       <End Role="Universidad" EntitySet="Universidads" />
       <End Role="Programa" EntitySet="Programas" />
     </AssociationSet>
-    <AssociationSet Name="FK__Programa__C_Usua__440B1D61" Association="Self.FK__Programa__C_Usua__440B1D61">
+    <AssociationSet Name="FK__Programa__C_Usua__4316F928" Association="Self.FK__Programa__C_Usua__4316F928">
       <End Role="Usuario" EntitySet="Usuarios" />
       <End Role="Programa" EntitySet="Programas" />
     </AssociationSet>
-    <AssociationSet Name="FK__Promocion__C_Usu__49C3F6B7" Association="Self.FK__Promocion__C_Usu__49C3F6B7">
+    <AssociationSet Name="FK__Promocion__C_Usu__4BAC3F29" Association="Self.FK__Promocion__C_Usu__4BAC3F29">
       <End Role="Usuario" EntitySet="Usuarios" />
       <End Role="Promocion" EntitySet="Promocions" />
     </AssociationSet>
-    <AssociationSet Name="FK__Escala__C_Vuelo__4CA06362" Association="Self.FK__Escala__C_Vuelo__4CA06362">
+    <AssociationSet Name="FK__Escala__C_Vuelo__4D94879B" Association="Self.FK__Escala__C_Vuelo__4D94879B">
       <End Role="Vuelo" EntitySet="Vueloes" />
       <End Role="Escala" EntitySet="Escalas" />
     </AssociationSet>
-    <AssociationSet Name="FK__Promocion__C_Vue__4AB81AF0" Association="Self.FK__Promocion__C_Vue__4AB81AF0">
+    <AssociationSet Name="FK__Promocion__C_Vue__4CA06362" Association="Self.FK__Promocion__C_Vue__4CA06362">
       <End Role="Vuelo" EntitySet="Vueloes" />
       <End Role="Promocion" EntitySet="Promocions" />
     </AssociationSet>
-    <AssociationSet Name="Reservaciones" Association="Self.Reservaciones">
-      <End Role="Reserva" EntitySet="Reservas" />
-      <End Role="Usuario" EntitySet="Usuarios" />
-    </AssociationSet>
-    <FunctionImport Name="Insertar_Aeronave" />
-    <FunctionImport Name="Insertar_Tiquete" />
-    <FunctionImport Name="Insertar_Universidad">
-      <Parameter Name="Identificador" Mode="In" Type="Int32" />
+    <FunctionImport Name="udsp_ins_escala">
+      <Parameter Name="C_Vuelo" Mode="In" Type="String" />
+      <Parameter Name="A_Salida" Mode="In" Type="String" />
+      <Parameter Name="A_Llegada" Mode="In" Type="String" />
+      <Parameter Name="F_Salida" Mode="In" Type="DateTime" />
+      <Parameter Name="F_Llegada" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="udsp_ins_pago">
+      <Parameter Name="Numero" Mode="In" Type="Int32" />
+      <Parameter Name="Contraseña" Mode="In" Type="Int32" />
+      <Parameter Name="Expiracion" Mode="In" Type="DateTime" />
+      <Parameter Name="Titular" Mode="In" Type="String" />
+      <Parameter Name="C_Reserva" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="udsp_ins_reserva">
+      <Parameter Name="C_Usuario" Mode="In" Type="String" />
+      <Parameter Name="C_Vuelo" Mode="In" Type="String" />
+      <Parameter Name="C_Economico" Mode="In" Type="Int32" />
+      <Parameter Name="C_Ejecutivo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="udsp_ins_tiquete">
+      <Parameter Name="Iteraciones" Mode="In" Type="Int32" />
+      <Parameter Name="C_Reserva" Mode="In" Type="Int32" />
+      <Parameter Name="Categoria" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="udsp_ins_universidad">
       <Parameter Name="Nombre" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="Insertar_Usuario">
+    <FunctionImport Name="udsp_ins_usuario">
       <Parameter Name="Nombre" Mode="In" Type="String" />
       <Parameter Name="Apellido1" Mode="In" Type="String" />
       <Parameter Name="Apellido2" Mode="In" Type="String" />
@@ -356,22 +428,30 @@
       <Parameter Name="Correo" Mode="In" Type="String" />
       <Parameter Name="Contraseña" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="sp_ins_escala">
-      <Parameter Name="C_Vuelo" Mode="In" Type="String" />
+    <FunctionImport Name="udsp_ins_vuelo">
+      <Parameter Name="Codigo" Mode="In" Type="String" />
+      <Parameter Name="C_Economico" Mode="In" Type="Int32" />
+      <Parameter Name="C_Ejecutivo" Mode="In" Type="Int32" />
+      <Parameter Name="F_Salida" Mode="In" Type="DateTime" />
+      <Parameter Name="F_Llegada" Mode="In" Type="DateTime" />
       <Parameter Name="A_Salida" Mode="In" Type="String" />
       <Parameter Name="A_Llegada" Mode="In" Type="String" />
-      <Parameter Name="F_Salida" Mode="In" Type="Time" />
-      <Parameter Name="F_Llegada" Mode="In" Type="Time" />
-    </FunctionImport>
-    <FunctionImport Name="sp_ins_vuelo">
-      <Parameter Name="Codigo" Mode="In" Type="String" />
-      <Parameter Name="Costo" Mode="In" Type="Int32" />
-      <Parameter Name="F_Salida" Mode="In" Type="Time" />
-      <Parameter Name="F_Llegada" Mode="In" Type="Time" />
       <Parameter Name="Millas" Mode="In" Type="Int32" />
       <Parameter Name="ID_Aeronave" Mode="In" Type="Int32" />
-      <Parameter Name="A_Economicos" Mode="In" Type="Int32" />
-      <Parameter Name="A_Ejecutivos" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="udsp_up_abrirvuelo">
+      <Parameter Name="C_Vuelo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="udsp_up_cerrarvuelo">
+      <Parameter Name="C_Vuelo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="udsp_up_reserva">
+      <Parameter Name="C_Reserva" Mode="In" Type="Int32" />
+      <Parameter Name="C_Maletas" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="udsp_up_tiquete">
+      <Parameter Name="Identificador" Mode="In" Type="Int32" />
+      <Parameter Name="N_Asiento" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
 </Schema>
