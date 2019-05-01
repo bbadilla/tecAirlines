@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Registro</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css"> 
+  </head>
+  <body>
+
+    <h1>Registro</h1>
+ 
+    <span>o <a href="log.html">acceder</a></span>
+    <body>
+
+          |   <input type="checkbox" name="producto"  onclick="habilita()"  /> Estudiante?
+        
+        <br/>
+    <form action="" method="POST">
+      <input name="name" type="text" placeholder="Nombre">  
+      <input name="phone" type="number" placeholder="Teléfono">  
+      <input name="email" type="text" placeholder="Email">
+      <input name="password" type="password" placeholder="Contraseña">
+      <input name="confirm_password" type="password" placeholder="Confirmar contraseña">
+      <input type="text" name="uni" id="uni" disabled="true" placeholder="Universidad" />
+      <input type="text" name="carne" id="carne" disabled="true" placeholder="Carné" />
+      <input type="submit" onclick="validar()" value="Enviar" >
+    </form>
+
+  </body>
+  <script src="js/sing.js"> </script>
+</html>
